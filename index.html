@@ -2,46 +2,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Main Menu</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
 <div class="stage">
 
-  <!-- MAIN BUTTONS -->
   <div class="btn story" onclick="openStory()">STORY 📖</div>
   <div class="btn game" onclick="openGame()">GAME 🎮</div>
 
-  <!-- STORY SLIDE PAGE -->
   <div id="storyPage" class="slide left">
     <div class="pageTitle">STORY 📖</div>
-    <div class="pageBtn" onclick="location.href='story.html'">The Bird Shares Its Food</div>
-    <div class="pageBtn" onclick="location.href='story2.html'">The Duck Help The Fish</div>
+    <div class="pageBtn storySub" onclick="location.href='story.html'">
+      The Bird Shares Its Food
+    </div>
+    <div class="pageBtn storySub" onclick="location.href='story.html'">
+      The Duck Helps The Fish
+    </div>
   </div>
 
-  <!-- GAME SLIDE PAGE -->
   <div id="gamePage" class="slide right">
     <div class="pageTitle">GAME 🎮</div>
-    <div class="pageBtn" onclick="location.href='game1.html'">Puzzle Game</div>
-    <div class="pageBtn" onclick="location.href='game2.html'">Running Game</div>
+    <div class="pageBtn gameSub">Puzzle Game</div>
+    <div class="pageBtn gameSub">Running Game</div>
   </div>
 
 </div>
 
 <script>
 function openStory(){
-  document.getElementById("storyPage").classList.add("show");
-  document.getElementById("gamePage").classList.remove("show");
+  storyPage.classList.add("show");
+  gamePage.classList.remove("show");
 }
-
 function openGame(){
-  document.getElementById("gamePage").classList.add("show");
-  document.getElementById("storyPage").classList.remove("show");
+  gamePage.classList.add("show");
+  storyPage.classList.remove("show");
 }
-
-<div class="pageBtn" onclick="location.href='bird.html'">The Bird Shares Its Food</div>
-<div class="pageBtn" onclick="location.href='duck.html'">The Duck Helps The Fish</div>
-
 </script>
+
 </body>
 </html>
+
