@@ -2,41 +2,87 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Session 1</title>
+<title>Animal Match</title>
 <style>
-body{text-align:center;font-family:Segoe UI;background:#BEE7FF}
-.choice{display:inline-block;margin:20px;padding:20px 40px;background:white;border-radius:20px;font-size:30px;cursor:pointer}
-.correct{background:#9CFFAE}
+body{
+  margin:0;
+  background:#AEE6FF;
+  font-family:"Segoe UI";
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+.gameBox{
+  background:white;
+  width:720px;
+  padding:30px;
+  border-radius:28px;
+  box-shadow:0 14px 0 rgba(0,0,0,.25);
+  text-align:center;
+}
+.btn{
+  margin:10px auto;
+  width:300px;
+  padding:16px;
+  background:#FFE082;
+  border-radius:14px;
+  font-size:22px;
+  cursor:pointer;
+  box-shadow:0 6px 0 rgba(0,0,0,.2);
+}
 </style>
 </head>
-<body>
 
-<h1>Session 1: Guess the Animal</h1>
-<h2 id="q">1 / 5</h2>
-<div id="pic" style="font-size:140px"></div>
+<body>
+<div class="gameBox">
+<h1>Which animal is this?</h1>
+<img id="animalImg" width="260"><br><br>
 <div id="choices"></div>
+</div>
 
 <script>
-const data=[{p:"🐶",w:"DOG"},{p:"🐱",w:"CAT"},{p:"🐮",w:"COW"},{p:"🦆",w:"DUCK"},{p:"🐦",w:"BIRD"}];
-let i=0,correct=0;
+const animals=[
+ {name:"Cat",img:"cat.png"},
+ {name:"Dog",img:"dog.png"},
+ {name:"Cow",img:"cow.png"},
+ {name:"Duck",img:"duck.png"},
+ {name:"Bird",img:"bird.png"}
+];
+
+let q=0,score=0;
 
 function load(){
- if(i==5){
-   if(correct==5) localStorage.stars1=1;
-   else localStorage.stars1=0;
-   location.href="food.html";
- }
- const d=data[Math.floor(Math.random()*data.length)];
- pic.textContent=d.p;
- choices.innerHTML="";
- [d.w,"CAT","COW"].sort(()=>.5-Math.random()).forEach(w=>{
-   const b=document.createElement("div");
-   b.className="choice";
-   b.textContent=w;
-   b.onclick=()=>{if(w==d.w)correct++;i++;load();}
-   choices.appendChild(b);
- });
- q.textContent=(i+1)+" / 5";
+  const a=animals[q];
+  animalImg.src=a.img;
+
+  let opts=[a.name];
+  while(opts.length<3){
+    let r=animals[Math.floor(Math.random()*animals.length)].name;
+    if(!opts.includes(r)) opts.push(r);
+  }
+  opts.sort(()=>Math.random()-0.5);
+
+  choices.innerHTML="";
+  opts.forEach(o=>{
+    let b=document.createElement("div");
+    b.className="btn";
+    b.innerText=o;
+    b.onclick=()=>check(b,o);
+    choices.appendChild(b);
+  });
+}
+function check(btn,a){
+  if(a==animals[q].name){
+    btn.style.background="#4CAF50";
+    score++;
+    setTimeout(next,700);
+  }else btn.style.background="#FF6B6B";
+}
+function next(){
+  q++;
+  if(q==5){ localStorage.s1=score; location.href="food.html"; }
+  else load();
 }
 load();
 </script>
