@@ -2,144 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Animal Word Game</title>
+<title>Session 1</title>
 <style>
-html,body{
-  margin:0;
-  width:100%;
-  height:100%;
-  background:linear-gradient(#AEE2FF,#FEE9A6);
-  font-family:Segoe UI;
-  overflow:hidden;
-  text-align:center;
-}
-
-#home{
-  position:fixed;
-  top:20px;
-  left:20px;
-  background:rgba(0,0,0,.5);
-  color:white;
-  padding:14px 26px;
-  border-radius:16px;
-  font-size:20px;
-  cursor:pointer;
-}
-
-h1{ font-size:44px; margin:16px; }
-#stars{ font-size:34px; color:#FFD700; }
-
-#pic{
-  font-size:140px;
-  margin:10px 0;
-}
-
-#choices{
-  display:flex;
-  justify-content:center;
-  gap:28px;
-}
-
-.choice{
-  background:white;
-  padding:26px 40px;
-  border-radius:18px;
-  font-size:36px;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 10px 0 rgba(0,0,0,.25);
-  transition:.1s;
-}
-.choice:active{
-  transform:translateY(6px);
-  box-shadow:0 3px 0 rgba(0,0,0,.25);
-}
-.correct{ background:#9CFFAE!important; }
-.wrong{ background:#FFB3B3!important; }
-
-#popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.4);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
-#popup div{
-  background:white;
-  padding:40px;
-  border-radius:30px;
-  font-size:40px;
-}
+body{text-align:center;font-family:Segoe UI;background:#BEE7FF}
+.choice{display:inline-block;margin:20px;padding:20px 40px;background:white;border-radius:20px;font-size:30px;cursor:pointer}
+.correct{background:#9CFFAE}
 </style>
 </head>
-
 <body>
 
-<div id="home" onclick="location.href='index.html'">⬅ HOME</div>
-
-<h1>Choose the Correct Word 🐾</h1>
-<div id="stars">⭐ 0</div>
-
-<div id="pic"></div>
+<h1>Session 1: Guess the Animal</h1>
+<h2 id="q">1 / 5</h2>
+<div id="pic" style="font-size:140px"></div>
 <div id="choices"></div>
 
-<div id="popup"><div>Great Job! 🎉</div></div>
-
-<audio id="good" src="click.mp3"></audio>
-<audio id="bad" src="click.mp3"></audio>
-
 <script>
-const animals = [
-  {pic:"🐶", word:"DOG"},
-  {pic:"🐱", word:"CAT"},
-  {pic:"🐮", word:"COW"},
-  {pic:"🐸", word:"FROG"},
-  {pic:"🦆", word:"DUCK"},
-  {pic:"🐦", word:"BIRD"}
-];
+const data=[{p:"🐶",w:"DOG"},{p:"🐱",w:"CAT"},{p:"🐮",w:"COW"},{p:"🦆",w:"DUCK"},{p:"🐦",w:"BIRD"}];
+let i=0,correct=0;
 
-let score=0;
-const pic = document.getElementById("pic");
-const choices = document.getElementById("choices");
-const stars = document.getElementById("stars");
-const popup = document.getElementById("popup");
-const good = document.getElementById("good");
-const bad = document.getElementById("bad");
-
-function shuffle(a){ return a.sort(()=>Math.random()-.5); }
-
-function newRound(){
-  popup.style.display="none";
-  choices.innerHTML="";
-
-  const current = animals[Math.floor(Math.random()*animals.length)];
-  pic.textContent = current.pic;
-
-  const options = shuffle([current.word, ...shuffle(animals.filter(a=>a.word!==current.word)).slice(0,2).map(a=>a.word)]);
-
-  options.forEach(w=>{
-    const b = document.createElement("div");
-    b.className="choice";
-    b.textContent=w;
-    b.onclick=()=>{
-      if(w===current.word){
-        b.classList.add("correct");
-        good.currentTime=0; good.play();
-        score++;
-        stars.textContent="⭐ "+score;
-        setTimeout(newRound,1000);
-      }else{
-        b.classList.add("wrong");
-        bad.currentTime=0; bad.play();
-      }
-    };
-    choices.appendChild(b);
-  });
+function load(){
+ if(i==5){
+   if(correct==5) localStorage.stars1=1;
+   else localStorage.stars1=0;
+   location.href="food.html";
+ }
+ const d=data[Math.floor(Math.random()*data.length)];
+ pic.textContent=d.p;
+ choices.innerHTML="";
+ [d.w,"CAT","COW"].sort(()=>.5-Math.random()).forEach(w=>{
+   const b=document.createElement("div");
+   b.className="choice";
+   b.textContent=w;
+   b.onclick=()=>{if(w==d.w)correct++;i++;load();}
+   choices.appendChild(b);
+ });
+ q.textContent=(i+1)+" / 5";
 }
-
-newRound();
+load();
 </script>
-
 </body>
 </html>
