@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Animal Matching</title>
+<title>Animal Word Match</title>
 <style>
 html,body{
   margin:0;
@@ -32,33 +32,27 @@ h1{
   align-items:center;
 }
 
-.animal, .shadow{
-  width:140px;
-  height:140px;
-  border-radius:30px;
+.pic, .word{
+  width:180px;
+  height:120px;
+  border-radius:22px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:90px;
-  cursor:grab;
+  font-size:46px;
+  cursor:pointer;
   user-select:none;
+  box-shadow:0 10px 0 rgba(0,0,0,.25);
 }
 
-.animal{
-  background:white;
-  box-shadow:0 12px 0 rgba(0,0,0,.25);
-}
-.shadow{
-  background:#6EA7E0;
-  opacity:.35;
-}
+.pic{ background:white; font-size:90px; }
+.word{ background:#6EA7E0; color:white; }
 
 .correct{
   background:#9CFFAE!important;
-  opacity:1!important;
+  color:#226622!important;
 }
 
-/* Popup */
 #popup{
   position:fixed;
   inset:0;
@@ -92,7 +86,7 @@ h1{
 
 <div id="home" onclick="location.href='index.html'">⬅ HOME</div>
 
-<h1>Match the Animals 🐾</h1>
+<h1>Match the Animal to the Word 🐾</h1>
 <div id="stars">⭐ 0</div>
 <div id="game"></div>
 
@@ -101,62 +95,79 @@ h1{
 <audio id="success" src="click.mp3"></audio>
 
 <script>
-const animals = ["🐶","🐱","🐮","🐸","🐷"];
+const animals = [
+  {pic:"🐶", word:"DOG"},
+  {pic:"🐱", word:"CAT"},
+  {pic:"🐮", word:"COW"},
+  {pic:"🐸", word:"FROG"},
+  {pic:"🦆", word:"DUCK"},
+  {pic:"🐦", word:"BIRD"}
+];
+
 const game = document.getElementById("game");
 const popup = document.getElementById("popup");
 const stars = document.getElementById("stars");
 const sound = document.getElementById("success");
 let score = 0;
+let selectedPic = null;
 
-function shuffle(arr){
-  return arr.sort(()=>Math.random()-.5);
-}
+function shuffle(arr){ return arr.sort(()=>Math.random()-.5); }
 
 function newRound(){
   game.innerHTML="";
   popup.style.display="none";
+  selectedPic = null;
 
   const picks = shuffle([...animals]).slice(0,3);
-  const shuffled = shuffle([...picks]);
+  const words = shuffle([...picks]);
 
   picks.forEach(a=>{
-    const el = document.createElement("div");
-    el.className="animal";
-    el.textContent=a;
-    el.draggable=true;
-    el.addEventListener("dragstart", e=>{
-      e.dataTransfer.setData("emoji", a);
-    });
-    game.appendChild(el);
+    const p = document.createElement("div");
+    p.className="pic";
+    p.textContent=a.pic;
+    p.dataset.word=a.word;
+    p.onclick = ()=>selectPic(p);
+    game.appendChild(p);
   });
 
-  shuffled.forEach(a=>{
-    const sh = document.createElement("div");
-    sh.className="shadow";
-    sh.textContent=a;
-    sh.dataset.match=a;
-    sh.addEventListener("dragover", e=>e.preventDefault());
-    sh.addEventListener("drop", e=>{
-      const em = e.dataTransfer.getData("emoji");
-      if(em === sh.dataset.match){
-        sh.textContent=em;
-        sh.classList.add("correct");
-        sound.currentTime=0;
-        sound.play();
-        score++;
-        stars.textContent="⭐ "+score;
-
-        if(document.querySelectorAll(".correct").length===3){
-          popup.style.display="flex";
-          setTimeout(newRound, 1400);
-        }
-      }
-    });
-    game.appendChild(sh);
+  words.forEach(a=>{
+    const w = document.createElement("div");
+    w.className="word";
+    w.textContent=a.word;
+    w.onclick = ()=>selectWord(w);
+    game.appendChild(w);
   });
 }
+
+function selectPic(p){
+  selectedPic = p;
+  document.querySelectorAll(".pic").forEach(x=>x.style.outline="");
+  p.style.outline="6px solid #FFD700";
+}
+
+function selectWord(w){
+  if(!selectedPic) return;
+
+  if(w.textContent === selectedPic.dataset.word){
+    w.classList.add("correct");
+    selectedPic.classList.add("correct");
+    sound.currentTime=0;
+    sound.play();
+    score++;
+    stars.textContent="⭐ "+score;
+
+    selectedPic = null;
+
+    if(document.querySelectorAll(".correct").length===6){
+      popup.style.display="flex";
+      setTimeout(newRound, 1600);
+    }
+  }
+}
+
 newRound();
 </script>
 
 </body>
 </html>
+
