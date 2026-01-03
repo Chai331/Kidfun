@@ -5,56 +5,55 @@
 <title>Animal Sound</title>
 <style>
 body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
-.gameBox{background:white;width:720px;padding:30px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
-.btn{margin:10px auto;width:300px;padding:16px;background:#FFE082;border-radius:14px;font-size:22px;cursor:pointer;}
+.box{background:white;width:600px;padding:40px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
+.choice{margin:12px auto;width:280px;padding:18px;background:#FFE082;border-radius:16px;font-size:24px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.25);}
 </style>
 </head>
 
 <body>
-<div class="gameBox">
+<div class="box">
 <h1>Listen & Guess</h1>
-<button onclick="playSound()">🔊 Play Sound</button><br><br>
-<div id="answers"></div>
+<button onclick="snd.play()" style="font-size:32px">🔊</button>
+<div id="choices"></div>
 </div>
 
 <script>
-const sounds=[
- {name:"Cat",file:"cat.mp3"},
- {name:"Dog",file:"dog.mp3"},
- {name:"Cow",file:"cow.mp3"}
+const data=[
+ {n:"Cat",f:"cat.mp3"},
+ {n:"Dog",f:"dog.mp3"},
+ {n:"Cow",f:"cow.mp3"}
 ];
 
 let order=[0,1,2].sort(()=>Math.random()-0.5);
-let i=0,score=0;
+let q=0,score=0;
 const snd=new Audio();
 
 function load(){
-  snd.src=sounds[order[i]].file;
-  let opts=[sounds[order[i]].name];
+  snd.src=data[order[q]].f;
+  let opts=[data[order[q]].n];
   while(opts.length<3){
-    let r=sounds[Math.floor(Math.random()*sounds.length)].name;
+    let r=data[Math.floor(Math.random()*data.length)].n;
     if(!opts.includes(r)) opts.push(r);
   }
   opts.sort(()=>Math.random()-0.5);
 
-  answers.innerHTML="";
+  choices.innerHTML="";
   opts.forEach(o=>{
     let b=document.createElement("div");
-    b.className="btn";
+    b.className="choice";
     b.innerText=o;
     b.onclick=()=>check(b,o);
-    answers.appendChild(b);
+    choices.appendChild(b);
   });
 }
-function playSound(){ snd.play(); }
 function check(btn,a){
-  if(a==sounds[order[i]].name){
-    btn.style.background="#4CAF50"; score++; setTimeout(next,700);
-  }else btn.style.background="#FF6B6B";
+  if(a==data[order[q]].n){ btn.style.background="#4CAF50"; score++; }
+  else btn.style.background="#FF6B6B";
+  setTimeout(next,700);
 }
 function next(){
-  i++;
-  if(i==3){ localStorage.s3=score; location.href="result.html"; }
+  q++;
+  if(q==3){ localStorage.s3=score; location.href="result.html"; }
   else load();
 }
 load();
