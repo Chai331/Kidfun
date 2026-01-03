@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Session 3</title>
+<style>
+body{text-align:center;font-family:Segoe UI;background:#D9EEFF}
+.choice{display:inline-block;margin:20px;padding:20px 40px;background:white;border-radius:20px;font-size:30px}
+</style>
+</head>
+<body>
+
+<h1>Session 3: Listen & Guess</h1>
+<button onclick="play()">🔊 Play Sound</button>
+<div id="choices"></div>
+
+<audio id="snd"></audio>
+
+<script>
+const data=[
+{w:"DOG",s:"dog.mp3"},
+{w:"CAT",s:"cat.mp3"},
+{w:"COW",s:"cow.mp3"}
+];
+let i=0,correct=0;
+
+function play(){ snd.src=data[i].s; snd.play(); }
+
+function load(){
+ if(i==3){
+  if(correct==3) localStorage.stars3=1;
+  else localStorage.stars3=0;
+  location.href="result.html";
+ }
+ choices.innerHTML="";
+ [data[i].w,"CAT","COW"].sort(()=>.5-Math.random()).forEach(w=>{
+   const b=document.createElement("div");
+   b.className="choice";
+   b.textContent=w;
+   b.onclick=()=>{if(w==data[i].w)correct++;i++;load();}
+   choices.appendChild(b);
+ });
+}
+load();
+</script>
+</body>
+</html>
