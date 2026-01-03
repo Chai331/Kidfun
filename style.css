@@ -51,4 +51,38 @@ html,body{
   color:#3A6F94;
 }
 
+/* PANELS */
+.panel{
+  position:absolute;
+  top:280px;
+  width:420px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.left{ left:80px; }
+.right{ right:80px; }
+
+.hidden{ display:none; }
+
+/* SUB BUTTONS */
+.sub{
+  padding:22px 30px;
+  font-size:22px;
+  border-radius:14px;
+}
+
+/* STORY SUB */
+.storySub{
+  background:#FFF3B0;
+  color:#8C8C32;
+}
+
+/* GAME SUB */
+.gameSub{
+  background:#D9EEFF;
+  color:#3A6F94;
+}
+
 }
