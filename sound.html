@@ -2,44 +2,60 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Session 3</title>
+<title>Animal Sound</title>
 <style>
-body{text-align:center;font-family:Segoe UI;background:#D9EEFF}
-.choice{display:inline-block;margin:20px;padding:20px 40px;background:white;border-radius:20px;font-size:30px}
+body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
+.gameBox{background:white;width:720px;padding:30px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
+.btn{margin:10px auto;width:300px;padding:16px;background:#FFE082;border-radius:14px;font-size:22px;cursor:pointer;}
 </style>
 </head>
+
 <body>
-
-<h1>Session 3: Listen & Guess</h1>
-<button onclick="play()">🔊 Play Sound</button>
-<div id="choices"></div>
-
-<audio id="snd"></audio>
+<div class="gameBox">
+<h1>Listen & Guess</h1>
+<button onclick="playSound()">🔊 Play Sound</button><br><br>
+<div id="answers"></div>
+</div>
 
 <script>
-const data=[
-{w:"DOG",s:"dog.mp3"},
-{w:"CAT",s:"cat.mp3"},
-{w:"COW",s:"cow.mp3"}
+const sounds=[
+ {name:"Cat",file:"cat.mp3"},
+ {name:"Dog",file:"dog.mp3"},
+ {name:"Cow",file:"cow.mp3"}
 ];
-let i=0,correct=0;
 
-function play(){ snd.src=data[i].s; snd.play(); }
+let order=[0,1,2].sort(()=>Math.random()-0.5);
+let i=0,score=0;
+const snd=new Audio();
 
 function load(){
- if(i==3){
-  if(correct==3) localStorage.stars3=1;
-  else localStorage.stars3=0;
-  location.href="result.html";
- }
- choices.innerHTML="";
- [data[i].w,"CAT","COW"].sort(()=>.5-Math.random()).forEach(w=>{
-   const b=document.createElement("div");
-   b.className="choice";
-   b.textContent=w;
-   b.onclick=()=>{if(w==data[i].w)correct++;i++;load();}
-   choices.appendChild(b);
- });
+  snd.src=sounds[order[i]].file;
+  let opts=[sounds[order[i]].name];
+  while(opts.length<3){
+    let r=sounds[Math.floor(Math.random()*sounds.length)].name;
+    if(!opts.includes(r)) opts.push(r);
+  }
+  opts.sort(()=>Math.random()-0.5);
+
+  answers.innerHTML="";
+  opts.forEach(o=>{
+    let b=document.createElement("div");
+    b.className="btn";
+    b.innerText=o;
+    b.onclick=()=>check(b,o);
+    answers.appendChild(b);
+  });
+}
+function playSound(){ snd.play(); }
+function check(btn,a){
+  if(a==sounds[order[i]].name){
+    btn.style.background="#4CAF50"; score++; setTimeout(next,700);
+  }else btn.style.background="#FF6B6B";
+}
+function next(){
+  i++;
+  if(i==3){ localStorage.s3=score; location.href="result.html"; }
+  else load();
 }
 load();
 </script>
