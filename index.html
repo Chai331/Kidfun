@@ -11,6 +11,9 @@
 <!-- Background Music -->
 <audio id="bgm" src="bgm.mp3" loop></audio>
 
+<!-- Click Sound -->
+<audio id="clickSound" src="click.mp3"></audio>
+
 <!-- Music Button -->
 <div id="musicBtn" onclick="toggleMusic()">🔈</div>
 
@@ -21,35 +24,47 @@
 
   <div id="storyPage" class="slide left">
     <div class="pageTitle">STORY 📖</div>
-    <div class="pageBtn storySub" onclick="location.href='bird.html'">
+
+    <div class="pageBtn storySub" onclick="playClick(); location.href='bird.html'">
       The Bird Shares Its Food
     </div>
-    <div class="pageBtn storySub" onclick="location.href='duck.html'">
+
+    <div class="pageBtn storySub" onclick="playClick(); location.href='duck.html'">
       The Duck Helps The Fish
     </div>
   </div>
 
   <div id="gamePage" class="slide right">
     <div class="pageTitle">GAME 🎮</div>
-    <div class="pageBtn gameSub">Puzzle Game</div>
-    <div class="pageBtn gameSub">Running Game</div>
+
+    <div class="pageBtn gameSub" onclick="playClick()">Puzzle Game</div>
+    <div class="pageBtn gameSub" onclick="playClick()">Running Game</div>
   </div>
 
 </div>
 
 <script>
 const bgm = document.getElementById("bgm");
+const click = document.getElementById("clickSound");
 const musicBtn = document.getElementById("musicBtn");
 let playing = true;
 
-/* Allow autoplay on first user interaction */
+/* Autoplay after first click */
 document.addEventListener("click", function autoPlay(){
   bgm.volume = 0.6;
   bgm.play();
   document.removeEventListener("click", autoPlay);
 });
 
+/* Play button sound */
+function playClick(){
+  click.currentTime = 0;
+  click.play();
+}
+
+/* Music On/Off */
 function toggleMusic(){
+  playClick();
   if(playing){
     bgm.pause();
     musicBtn.textContent = "🔇";
@@ -60,11 +75,14 @@ function toggleMusic(){
   playing = !playing;
 }
 
+/* Menus */
 function openStory(){
+  playClick();
   storyPage.classList.add("show");
   gamePage.classList.remove("show");
 }
 function openGame(){
+  playClick();
   gamePage.classList.add("show");
   storyPage.classList.remove("show");
 }
