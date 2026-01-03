@@ -3,7 +3,7 @@ html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+  font-family:Segoe UI;
 }
 
 .stage{
@@ -21,81 +21,59 @@ html,body{
   border-radius:20px;
   font-size:46px;
   font-weight:900;
-  letter-spacing:2px;
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:16px;
   cursor:pointer;
-  user-select:none;
-  transition:.1s;
   box-shadow:0 10px 0 rgba(0,0,0,.28);
+  transition:.1s;
+  z-index:3;
 }
 .btn:active{
   transform:translateY(7px);
   box-shadow:0 3px 0 rgba(0,0,0,.28);
 }
 
-/* MAIN BUTTON POSITIONS (above the dog) */
-.story{
-  left:900px;
-  top:200px;          /* moved higher */
-  background:#FFF3B0;
-  color:#8C8C32;
-}
+.story{ left:120px; top:140px; background:#FFF3B0; color:#8C8C32; }
+.game{ right:140px; top:300px; background:#CFEAFF; color:#3A6F94; }
 
-.game{
-  right:400px;
-  top:400px;         /* moved higher */
-  background:#CFEAFF;
-  color:#3A6F94;
-}
-
-/* SLIDE PAGES */
+/* SLIDE PANELS */
 .slide{
   position:absolute;
   top:80px;
-  bottom:40px;               /* makes panel stretch downward */
-  width:460px;
-  padding:30px;
+  bottom:40px;
+  width:420px;
+  padding:28px;
   border-radius:28px;
   box-shadow:0 20px 0 rgba(0,0,0,.25);
   display:flex;
   flex-direction:column;
-  gap:22px;
-  transition:.4s ease;
-  overflow:auto;             /* scroll if content too long */
+  gap:20px;
+  transition:.45s cubic-bezier(.3,1.3,.4,1);
+  z-index:2;
 }
 
-.slide.left{
-  left:-520px;
-  background:#FFF3B0;
-}
-.slide.right{
-  right:-520px;
-  background:#D9EEFF;
-}
+.left{ left:-480px; background:#FFF3B0; }
+.right{ right:-480px; background:#D9EEFF; }
 
-.slide.left.show{ left:40px; }
-.slide.right.show{ right:40px; }
+.left.show{ left:40px; }
+.right.show{ right:40px; }
 
+/* PANEL CONTENT */
 .pageTitle{
-  font-size:40px;
+  font-size:36px;
   font-weight:900;
 }
 
-/* PAGE BUTTONS */
 .pageBtn{
-  padding:22px 26px;
+  background:white;
+  padding:20px;
   border-radius:14px;
-  font-size:22px;
-  font-weight:700;
-  background:rgba(255,255,255,.6);
-  box-shadow:0 8px 0 rgba(0,0,0,.25);
   cursor:pointer;
-  user-select:none;
+  box-shadow:0 7px 0 rgba(0,0,0,.25);
   transition:.1s;
 }
 .pageBtn:active{
-  transform:translateY(6px);
+  transform:translateY(5px);
   box-shadow:0 2px 0 rgba(0,0,0,.25);
 }
