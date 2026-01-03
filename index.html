@@ -14,27 +14,26 @@
 
   <!-- STORY PANEL -->
   <div id="storyPanel" class="panel left hidden">
-    <div class="btn sub storySub">The Bird Shares Its Food</div>
-    <div class="btn sub storySub">The Duck Help The Fish</div>
+    <div class="sub storySub">The Bird Shares Its Food</div>
+    <div class="sub storySub">The Duck Help The Fish</div>
   </div>
 
   <!-- GAME PANEL -->
   <div id="gamePanel" class="panel right hidden">
-    <div class="btn sub gameSub">Puzzle Game</div>
-    <div class="btn sub gameSub">Running Game</div>
+    <div class="sub gameSub">Puzzle Game</div>
+    <div class="sub gameSub">Running Game</div>
   </div>
 
 </div>
 
 <script>
 function showStory(){
-  document.getElementById("storyPanel").classList.remove("hidden");
-  document.getElementById("gamePanel").classList.add("hidden");
+  storyPanel.classList.remove("hidden");
+  gamePanel.classList.add("hidden");
 }
-
 function showGame(){
-  document.getElementById("gamePanel").classList.remove("hidden");
-  document.getElementById("storyPanel").classList.add("hidden");
+  gamePanel.classList.remove("hidden");
+  storyPanel.classList.add("hidden");
 }
 </script>
 </body>
