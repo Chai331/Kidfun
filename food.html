@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Session 2</title>
+<style>
+body{text-align:center;font-family:Segoe UI;background:#FFF3B0}
+.item{display:inline-block;width:140px;height:140px;font-size:90px;background:white;border-radius:20px;margin:20px}
+</style>
+</head>
+<body>
+
+<h1>Session 2: Match Food</h1>
+
+<div>
+<div class="item" draggable="true" data="banana">🐵</div>
+<div class="item" draggable="true" data="fish">🐱</div>
+<div class="item" draggable="true" data="grass">🐮</div>
+</div>
+
+<div>
+<div class="item" data="banana">🍌</div>
+<div class="item" data="fish">🐟</div>
+<div class="item" data="grass">🌿</div>
+</div>
+
+<script>
+let ok=0;
+document.querySelectorAll("[draggable]").forEach(a=>{
+ a.ondragstart=e=>e.dataTransfer.setData("f",a.getAttribute("data"));
+});
+document.querySelectorAll(".item:not([draggable])").forEach(b=>{
+ b.ondragover=e=>e.preventDefault();
+ b.ondrop=e=>{
+   if(e.dataTransfer.getData("f")==b.getAttribute("data")){
+     ok++; if(ok==3){localStorage.stars2=1;location.href="sound.html";}
+   }
+ }
+});
+</script>
+</body>
+</html>
