@@ -37,7 +37,7 @@ html,body{
 
 /* MAIN BUTTON POSITIONS (above the dog) */
 .story{
-  right:450px;
+  left:450px;
   top:200px;          /* moved higher */
   background:#FFF3B0;
   color:#8C8C32;
