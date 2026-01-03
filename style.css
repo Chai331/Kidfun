@@ -35,16 +35,17 @@ html,body{
   box-shadow:0 3px 0 rgba(0,0,0,.28);
 }
 
-/* MAIN BUTTON POSITIONS */
+/* MAIN BUTTON POSITIONS (above the dog) */
 .story{
-  left:120px;
-  top:150px;
+  left:170px;
+  top:90px;          /* moved higher */
   background:#FFF3B0;
   color:#8C8C32;
 }
+
 .game{
-  right:140px;
-  top:300px;
+  right:200px;
+  top:170px;         /* moved higher */
   background:#CFEAFF;
   color:#3A6F94;
 }
