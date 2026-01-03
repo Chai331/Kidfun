@@ -37,16 +37,18 @@ html,body{
 
 /* STORY */
 .story{
-  left:70px;
-  top:150px;
+  left:140px;
+  top:180px;
   background:#FFF3B0;
   color:#8C8C32;
 }
 
 /* GAME */
 .game{
-  right:110px;
-  top:340px;
+  right:160px;
+  top:320px;
   background:#CFEAFF;
   color:#3A6F94;
+}
+
 }
