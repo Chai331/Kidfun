@@ -2,41 +2,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Session 2</title>
+<title>Animal Food</title>
 <style>
-body{text-align:center;font-family:Segoe UI;background:#FFF3B0}
-.item{display:inline-block;width:140px;height:140px;font-size:90px;background:white;border-radius:20px;margin:20px}
+body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
+.gameBox{background:white;width:720px;padding:30px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
+.item{display:inline-block;width:150px;margin:10px;padding:16px;background:#FFE082;border-radius:14px;cursor:pointer;}
 </style>
 </head>
+
 <body>
-
-<h1>Session 2: Match Food</h1>
-
-<div>
-<div class="item" draggable="true" data="banana">🐵</div>
-<div class="item" draggable="true" data="fish">🐱</div>
-<div class="item" draggable="true" data="grass">🐮</div>
-</div>
-
-<div>
-<div class="item" data="banana">🍌</div>
-<div class="item" data="fish">🐟</div>
-<div class="item" data="grass">🌿</div>
+<div class="gameBox">
+<h1>Match Animal With Food</h1>
+<div id="animals"></div><br>
+<div id="foods"></div>
 </div>
 
 <script>
-let ok=0;
-document.querySelectorAll("[draggable]").forEach(a=>{
- a.ondragstart=e=>e.dataTransfer.setData("f",a.getAttribute("data"));
-});
-document.querySelectorAll(".item:not([draggable])").forEach(b=>{
- b.ondragover=e=>e.preventDefault();
- b.ondrop=e=>{
-   if(e.dataTransfer.getData("f")==b.getAttribute("data")){
-     ok++; if(ok==3){localStorage.stars2=1;location.href="sound.html";}
-   }
- }
-});
+const pairs={Monkey:"Banana",Cow:"Grass",Duck:"Worm"};
+let selected=null,score=0;
+
+for(let a in pairs){
+  animals.innerHTML+=`<div class="item" onclick="pick('${a}',this)">${a}</div>`;
+  foods.innerHTML+=`<div class="item" onclick="pick('${pairs[a]}',this)">${pairs[a]}</div>`;
+}
+
+function pick(val,el){
+  if(!selected){ selected={val,el}; return; }
+  if(pairs[selected.val]==val){
+    selected.el.style.background="#4CAF50";
+    el.style.background="#4CAF50";
+    score++;
+  }else{
+    selected.el.style.background="#FF6B6B";
+    el.style.background="#FF6B6B";
+  }
+  selected=null;
+  if(score==3){ localStorage.s2=score; setTimeout(()=>location.href="sound.html",1000); }
+}
 </script>
 </body>
 </html>
