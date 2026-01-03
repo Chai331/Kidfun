@@ -9,19 +9,22 @@
 
 <div class="stage">
 
+  <!-- Background Music -->
+  <audio id="bgm" src="bgm.mp3" loop></audio>
+  <div id="musicBtn" onclick="toggleMusic()">🔊</div>
+
+  <!-- MAIN BUTTONS -->
   <div class="btn story" onclick="openStory()">STORY 📖</div>
   <div class="btn game" onclick="openGame()">GAME 🎮</div>
 
+  <!-- STORY PANEL -->
   <div id="storyPage" class="slide left">
     <div class="pageTitle">STORY 📖</div>
-    <div class="pageBtn storySub" onclick="location.href='bird.html'">
-      The Bird Shares Its Food
-    </div>
-    <div class="pageBtn storySub" onclick="location.href='duck.html'">
-      The Duck Helps The Fish
-    </div>
+    <div class="pageBtn storySub" onclick="location.href='bird.html'">The Bird Shares Its Food</div>
+    <div class="pageBtn storySub" onclick="location.href='duck.html'">The Duck Helps The Fish</div>
   </div>
 
+  <!-- GAME PANEL -->
   <div id="gamePage" class="slide right">
     <div class="pageTitle">GAME 🎮</div>
     <div class="pageBtn gameSub">Puzzle Game</div>
@@ -38,6 +41,22 @@ function openStory(){
 function openGame(){
   gamePage.classList.add("show");
   storyPage.classList.remove("show");
+}
+
+const bgm = document.getElementById("bgm");
+const musicBtn = document.getElementById("musicBtn");
+let playing = false;
+
+function toggleMusic(){
+  if(!playing){
+    bgm.volume = 0.6;
+    bgm.play();
+    musicBtn.textContent = "🔈";
+  }else{
+    bgm.pause();
+    musicBtn.textContent = "🔇";
+  }
+  playing = !playing;
 }
 </script>
 
