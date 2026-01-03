@@ -2,82 +2,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Animal Match</title>
+<title>Guess the Animal</title>
 <style>
 body{
   margin:0;
   background:#AEE6FF;
-  font-family:"Segoe UI";
+  font-family:Segoe UI;
   display:flex;
   align-items:center;
   justify-content:center;
   height:100vh;
 }
-.gameBox{
+.box{
   background:white;
-  width:720px;
-  padding:30px;
+  width:600px;
+  padding:40px;
   border-radius:28px;
   box-shadow:0 14px 0 rgba(0,0,0,.25);
   text-align:center;
 }
-.btn{
-  margin:10px auto;
-  width:300px;
-  padding:16px;
+.animal{
+  font-size:140px;
+}
+.choice{
+  margin:12px auto;
+  width:280px;
+  padding:18px;
   background:#FFE082;
-  border-radius:14px;
-  font-size:22px;
+  border-radius:16px;
+  font-size:24px;
   cursor:pointer;
-  box-shadow:0 6px 0 rgba(0,0,0,.2);
+  box-shadow:0 6px 0 rgba(0,0,0,.25);
 }
 </style>
 </head>
 
 <body>
-<div class="gameBox">
+<div class="box">
 <h1>Which animal is this?</h1>
-<img id="animalImg" width="260"><br><br>
+<div class="animal" id="icon"></div>
 <div id="choices"></div>
 </div>
 
 <script>
-const animals=[
- {name:"Cat",img:"cat.png"},
- {name:"Dog",img:"dog.png"},
- {name:"Cow",img:"cow.png"},
- {name:"Duck",img:"duck.png"},
- {name:"Bird",img:"bird.png"}
+const data=[
+ {n:"Cat",i:"🐱"},
+ {n:"Dog",i:"🐶"},
+ {n:"Cow",i:"🐮"},
+ {n:"Duck",i:"🦆"},
+ {n:"Bird",i:"🐦"}
 ];
 
 let q=0,score=0;
 
 function load(){
-  const a=animals[q];
-  animalImg.src=a.img;
-
-  let opts=[a.name];
+  icon.innerText=data[q].i;
+  let opts=[data[q].n];
   while(opts.length<3){
-    let r=animals[Math.floor(Math.random()*animals.length)].name;
+    let r=data[Math.floor(Math.random()*data.length)].n;
     if(!opts.includes(r)) opts.push(r);
   }
   opts.sort(()=>Math.random()-0.5);
-
   choices.innerHTML="";
   opts.forEach(o=>{
     let b=document.createElement("div");
-    b.className="btn";
+    b.className="choice";
     b.innerText=o;
     b.onclick=()=>check(b,o);
     choices.appendChild(b);
   });
 }
 function check(btn,a){
-  if(a==animals[q].name){
+  if(a==data[q].n){
     btn.style.background="#4CAF50";
     score++;
-    setTimeout(next,700);
   }else btn.style.background="#FF6B6B";
+  setTimeout(next,700);
 }
 function next(){
   q++;
