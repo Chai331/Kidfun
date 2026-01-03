@@ -37,14 +37,14 @@ html,body{
 
 /* MAIN BUTTON POSITIONS (above the dog) */
 .story{
-  right:400px;
-  top:250px;          /* moved higher */
+  right:450px;
+  top:200px;          /* moved higher */
   background:#FFF3B0;
   color:#8C8C32;
 }
 
 .game{
-  right:400px;
+  right:450px;
   top:300px;         /* moved higher */
   background:#CFEAFF;
   color:#3A6F94;
