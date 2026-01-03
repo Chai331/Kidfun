@@ -5,40 +5,51 @@
 <title>Animal Food</title>
 <style>
 body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
-.gameBox{background:white;width:720px;padding:30px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
-.item{display:inline-block;width:150px;margin:10px;padding:16px;background:#FFE082;border-radius:14px;cursor:pointer;}
+.box{background:white;width:620px;padding:40px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
+.item{margin:16px auto;width:260px;padding:18px;background:#FFE082;border-radius:16px;font-size:24px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.25);}
 </style>
 </head>
 
 <body>
-<div class="gameBox">
-<h1>Match Animal With Food</h1>
-<div id="animals"></div><br>
+<div class="box">
+<h1>What does this animal eat?</h1>
+<div id="animal" style="font-size:120px"></div>
 <div id="foods"></div>
 </div>
 
 <script>
-const pairs={Monkey:"Banana",Cow:"Grass",Duck:"Worm"};
-let selected=null,score=0;
+const data=[
+ {a:"🐵",f:"Banana"},
+ {a:"🐮",f:"Grass"},
+ {a:"🦆",f:"Worm"}
+];
 
-for(let a in pairs){
-  animals.innerHTML+=`<div class="item" onclick="pick('${a}',this)">${a}</div>`;
-  foods.innerHTML+=`<div class="item" onclick="pick('${pairs[a]}',this)">${pairs[a]}</div>`;
-}
+let q=0,score=0;
 
-function pick(val,el){
-  if(!selected){ selected={val,el}; return; }
-  if(pairs[selected.val]==val){
-    selected.el.style.background="#4CAF50";
-    el.style.background="#4CAF50";
-    score++;
-  }else{
-    selected.el.style.background="#FF6B6B";
-    el.style.background="#FF6B6B";
-  }
-  selected=null;
-  if(score==3){ localStorage.s2=score; setTimeout(()=>location.href="sound.html",1000); }
+function load(){
+  animal.innerText=data[q].a;
+  let opts=[data[q].f,"Apple","Fish"];
+  opts=opts.sort(()=>Math.random()-0.5);
+  foods.innerHTML="";
+  opts.forEach(o=>{
+    let b=document.createElement("div");
+    b.className="item";
+    b.innerText=o;
+    b.onclick=()=>check(b,o);
+    foods.appendChild(b);
+  });
 }
+function check(btn,a){
+  if(a==data[q].f){ btn.style.background="#4CAF50"; score++; }
+  else btn.style.background="#FF6B6B";
+  setTimeout(next,700);
+}
+function next(){
+  q++;
+  if(q==3){ localStorage.s2=score; location.href="sound.html"; }
+  else load();
+}
+load();
 </script>
 </body>
 </html>
