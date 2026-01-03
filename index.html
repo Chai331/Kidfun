@@ -2,21 +2,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="stage">
 
-  <div class="btn story" onclick="location.href='story.html'">
-    STORY <span>📖</span>
+  <!-- MAIN BUTTONS -->
+  <div class="btn story main" onclick="showStory()">STORY 📖</div>
+  <div class="btn game main" onclick="showGame()">GAME 🎮</div>
+
+  <!-- STORY PANEL -->
+  <div id="storyPanel" class="panel left hidden">
+    <div class="btn sub storySub">The Bird Shares Its Food</div>
+    <div class="btn sub storySub">The Duck Help The Fish</div>
   </div>
 
-  <div class="btn game" onclick="location.href='game.html'">
-    GAME <span>🎮</span>
+  <!-- GAME PANEL -->
+  <div id="gamePanel" class="panel right hidden">
+    <div class="btn sub gameSub">Puzzle Game</div>
+    <div class="btn sub gameSub">Running Game</div>
   </div>
 
 </div>
+
+<script>
+function showStory(){
+  document.getElementById("storyPanel").classList.remove("hidden");
+  document.getElementById("gamePanel").classList.add("hidden");
+}
+
+function showGame(){
+  document.getElementById("gamePanel").classList.remove("hidden");
+  document.getElementById("storyPanel").classList.add("hidden");
+}
+</script>
 </body>
 </html>
