@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html>
-<body style="text-align:center;font-family:Segoe UI">
-<h1>🎓 Your Result</h1>
-<h2 id="r"></h2>
+<head>
+<meta charset="UTF-8">
+<title>Result</title>
+<style>
+body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
+.gameBox{background:white;width:500px;padding:30px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
+</style>
+</head>
+
+<body>
+<div class="gameBox">
+<h1>🎉 Your Stars</h1>
+<h2 id="stars"></h2>
+<button onclick="location.href='index.html'">Back to Menu</button>
+</div>
+
 <script>
-let total=(+localStorage.stars1||0)+(+localStorage.stars2||0)+(+localStorage.stars3||0);
-r.textContent="You got "+total+" / 3 Stars ⭐";
+let total=(+localStorage.s1>=5)+( +localStorage.s2>=3)+( +localStorage.s3>=3);
+stars.innerHTML="🌟 ".repeat(total);
 </script>
 </body>
 </html>
