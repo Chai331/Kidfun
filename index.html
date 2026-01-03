@@ -9,31 +9,33 @@
 <div class="stage">
 
   <!-- MAIN BUTTONS -->
-  <div class="btn story main" onclick="showStory()">STORY 📖</div>
-  <div class="btn game main" onclick="showGame()">GAME 🎮</div>
+  <div class="btn story main" onclick="openStory()">STORY 📖</div>
+  <div class="btn game main" onclick="openGame()">GAME 🎮</div>
 
-  <!-- STORY PANEL -->
-  <div id="storyPanel" class="panel left hidden">
-    <div class="sub storySub">The Bird Shares Its Food</div>
-    <div class="sub storySub">The Duck Help The Fish</div>
+  <!-- STORY SLIDE PAGE -->
+  <div id="storyPage" class="slide left hidden">
+    <div class="pageTitle">STORY 📖</div>
+    <div class="pageBtn storySub">The Bird Shares Its Food</div>
+    <div class="pageBtn storySub">The Duck Help The Fish</div>
   </div>
 
-  <!-- GAME PANEL -->
-  <div id="gamePanel" class="panel right hidden">
-    <div class="sub gameSub">Puzzle Game</div>
-    <div class="sub gameSub">Running Game</div>
+  <!-- GAME SLIDE PAGE -->
+  <div id="gamePage" class="slide right hidden">
+    <div class="pageTitle">GAME 🎮</div>
+    <div class="pageBtn gameSub">Puzzle Game</div>
+    <div class="pageBtn gameSub">Running Game</div>
   </div>
 
 </div>
 
 <script>
-function showStory(){
-  storyPanel.classList.remove("hidden");
-  gamePanel.classList.add("hidden");
+function openStory(){
+  storyPage.classList.remove("hidden");
+  gamePage.classList.add("hidden");
 }
-function showGame(){
-  gamePanel.classList.remove("hidden");
-  storyPanel.classList.add("hidden");
+function openGame(){
+  gamePage.classList.remove("hidden");
+  storyPage.classList.add("hidden");
 }
 </script>
 </body>
