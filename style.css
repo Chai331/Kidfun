@@ -3,6 +3,7 @@ html,body{
   width:100%;
   height:100%;
   overflow:hidden;
+  font-family: "Arial Rounded MT Bold", Arial, sans-serif;
 }
 
 .stage{
@@ -13,7 +14,7 @@ html,body{
   position:relative;
 }
 
-/* MAIN BUTTONS (STORY / GAME) */
+/* MAIN BUTTONS */
 .btn{
   position:absolute;
   padding:26px 56px;
@@ -29,21 +30,18 @@ html,body{
   transition:.1s;
   box-shadow:0 10px 0 rgba(0,0,0,.28);
 }
-
 .btn:active{
   transform:translateY(7px);
   box-shadow:0 3px 0 rgba(0,0,0,.28);
 }
 
-/* STORY BUTTON */
+/* MAIN BUTTON POSITIONS */
 .story{
   left:120px;
   top:150px;
   background:#FFF3B0;
   color:#8C8C32;
 }
-
-/* GAME BUTTON */
 .game{
   right:140px;
   top:300px;
@@ -51,46 +49,50 @@ html,body{
   color:#3A6F94;
 }
 
-/* PANELS */
-.panel{
+/* SLIDE PAGES */
+.slide{
   position:absolute;
-  top:300px;
-  width:360px;
+  top:120px;
+  width:460px;
+  padding:30px;
+  border-radius:28px;
+  box-shadow:0 20px 0 rgba(0,0,0,.25);
   display:flex;
   flex-direction:column;
-  gap:18px;
+  gap:22px;
+  transition:.4s ease;
 }
 
-.left{ left:120px; }
-.right{ right:120px; }
+.slide.left{
+  left:-520px;
+  background:#FFF3B0;
+}
+.slide.right{
+  right:-520px;
+  background:#D9EEFF;
+}
 
-.hidden{ display:none; }
+.slide.left.show{ left:40px; }
+.slide.right.show{ right:40px; }
 
-/* SUB BUTTONS */
-.sub{
-  padding:20px 26px;
+.pageTitle{
+  font-size:40px;
+  font-weight:900;
+}
+
+/* PAGE BUTTONS */
+.pageBtn{
+  padding:22px 26px;
   border-radius:14px;
-  font-size:20px;
+  font-size:22px;
   font-weight:700;
-  box-shadow:0 7px 0 rgba(0,0,0,.25);
+  background:rgba(255,255,255,.6);
+  box-shadow:0 8px 0 rgba(0,0,0,.25);
   cursor:pointer;
   user-select:none;
   transition:.1s;
 }
-
-.sub:active{
-  transform:translateY(5px);
+.pageBtn:active{
+  transform:translateY(6px);
   box-shadow:0 2px 0 rgba(0,0,0,.25);
-}
-
-/* STORY SUB */
-.storySub{
-  background:#FFF3B0;
-  color:#8C8C32;
-}
-
-/* GAME SUB */
-.gameSub{
-  background:#D9EEFF;
-  color:#3A6F94;
 }
