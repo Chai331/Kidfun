@@ -2,19 +2,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Guess the Animal</title>
+<title>Session 1</title>
 <style>
-body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
-.box{background:white;width:600px;padding:40px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
-.animal{font-size:140px;}
-.choice{margin:12px auto;width:280px;padding:18px;background:#FFE082;border-radius:16px;font-size:24px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.25);}
+body{
+  margin:0;background:#AEE6FF;font-family:Segoe UI;
+  display:flex;align-items:center;justify-content:center;height:100vh;
+}
+.box{
+  background:white;width:600px;padding:40px;border-radius:28px;
+  box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;position:relative;
+}
+.choice{
+  margin:12px auto;width:280px;padding:18px;background:#FFE082;
+  border-radius:16px;font-size:24px;cursor:pointer;
+  box-shadow:0 6px 0 rgba(0,0,0,.25);
+}
+.bigStar{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:140px;animation:pop .8s ease-out forwards;
+}
+@keyframes pop{
+  from{transform:scale(.2);opacity:0}
+  to{transform:scale(1.4);opacity:1}
+}
+.progress{position:absolute;top:16px;right:16px;font-weight:700;}
+.sessionTitle{position:absolute;top:-40px;font-size:22px;font-weight:900;}
 </style>
 </head>
 
 <body>
 <div class="box">
-<h1>Which animal is this?</h1>
-<div class="animal" id="icon"></div>
+<div class="sessionTitle">SESSION 1</div>
+<div class="progress" id="prog">0 / 3</div>
+<div id="icon" style="font-size:140px"></div>
 <div id="choices"></div>
 </div>
 
@@ -25,14 +45,14 @@ const no=new Audio("wrong.mp3");
 const data=[
  {n:"Cat",i:"🐱"},
  {n:"Dog",i:"🐶"},
- {n:"Cow",i:"🐮"},
- {n:"Duck",i:"🦆"},
- {n:"Bird",i:"🐦"}
+ {n:"Cow",i:"🐮"}
 ];
 
-let q=0,score=0;
+let q=0,perfect=0,firstTry=true;
 
 function load(){
+  firstTry=true;
+  prog.innerText=`${q}/3`;
   icon.innerText=data[q].i;
   let opts=[data[q].n];
   while(opts.length<3){
@@ -40,7 +60,6 @@ function load(){
     if(!opts.includes(r)) opts.push(r);
   }
   opts.sort(()=>Math.random()-0.5);
-
   choices.innerHTML="";
   opts.forEach(o=>{
     let b=document.createElement("div");
@@ -55,18 +74,24 @@ function check(btn,a){
   if(a==data[q].n){
     ok.play();
     btn.style.background="#4CAF50";
-    score++;
+    if(firstTry) perfect++;
+    setTimeout(next,700);
   }else{
     no.play();
     btn.style.background="#FF6B6B";
+    firstTry=false;
   }
-  setTimeout(next,700);
 }
 
 function next(){
   q++;
-  if(q==5){ localStorage.s1=score; location.href="food.html"; }
-  else load();
+  if(q==3){
+    if(perfect==3){
+      document.querySelector(".box").innerHTML+="<div class='bigStar'>🌟</div>";
+      localStorage.star1=1;
+    }else localStorage.star1=0;
+    setTimeout(()=>location.href="food.html",1400);
+  }else load();
 }
 load();
 </script>
