@@ -2,23 +2,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Result</title>
+<title>Your Result</title>
 <style>
-body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
-.gameBox{background:white;width:500px;padding:30px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
+body{
+  margin:0;background:#FFF6B0;font-family:Segoe UI;
+  display:flex;align-items:center;justify-content:center;height:100vh;
+}
+.card{
+  background:white;width:600px;padding:40px;border-radius:30px;
+  box-shadow:0 16px 0 rgba(0,0,0,.25);text-align:center;
+}
+h1{margin:0 0 20px;font-size:42px;}
+.starRow{font-size:90px;margin:10px 0;}
+.btn{
+  background:#AEE6FF;padding:18px 50px;border-radius:18px;
+  font-size:28px;font-weight:900;cursor:pointer;
+  box-shadow:0 8px 0 rgba(0,0,0,.25);
+}
+.btn:active{transform:translateY(6px);box-shadow:0 2px 0 rgba(0,0,0,.25);}
 </style>
 </head>
 
 <body>
-<div class="gameBox">
-<h1>🎉 Your Stars</h1>
-<h2 id="stars"></h2>
-<button onclick="location.href='index.html'">Back to Menu</button>
+<div class="card">
+  <h1>Great Job! 🎉</h1>
+  <div id="stars" class="starRow"></div>
+  <div class="btn" onclick="location.href='index.html'">BACK TO MENU</div>
 </div>
 
 <script>
-let total=(+localStorage.s1>=5)+( +localStorage.s2>=3)+( +localStorage.s3>=3);
-stars.innerHTML="🌟 ".repeat(total);
+let total = 
+  (parseInt(localStorage.star1)||0)+
+  (parseInt(localStorage.star2)||0)+
+  (parseInt(localStorage.star3)||0);
+
+stars.innerHTML="🌟".repeat(total) || "😿";
 </script>
 </body>
 </html>
