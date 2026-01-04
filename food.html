@@ -18,6 +18,9 @@ body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:c
 </div>
 
 <script>
+const ok=new Audio("correct.mp3");
+const no=new Audio("wrong.mp3");
+
 const data=[
  {a:"🐵",f:"Banana"},
  {a:"🐮",f:"Grass"},
@@ -29,7 +32,8 @@ let q=0,score=0;
 function load(){
   animal.innerText=data[q].a;
   let opts=[data[q].f,"Apple","Fish"];
-  opts=opts.sort(()=>Math.random()-0.5);
+  opts.sort(()=>Math.random()-0.5);
+
   foods.innerHTML="";
   opts.forEach(o=>{
     let b=document.createElement("div");
@@ -39,11 +43,19 @@ function load(){
     foods.appendChild(b);
   });
 }
+
 function check(btn,a){
-  if(a==data[q].f){ btn.style.background="#4CAF50"; score++; }
-  else btn.style.background="#FF6B6B";
+  if(a==data[q].f){
+    ok.play();
+    btn.style.background="#4CAF50";
+    score++;
+  }else{
+    no.play();
+    btn.style.background="#FF6B6B";
+  }
   setTimeout(next,700);
 }
+
 function next(){
   q++;
   if(q==3){ localStorage.s2=score; location.href="sound.html"; }
