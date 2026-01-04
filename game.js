@@ -20,8 +20,8 @@ const s3=[
 ];
 
 function startGame(){
-  startScreen.classList.add("hide");
-  gameArea.classList.remove("hide");
+  document.getElementById("startScreen").classList.add("hide");
+  document.getElementById("gameArea").classList.remove("hide");
   loadSession();
 }
 
@@ -32,7 +32,7 @@ function fillStar(n){
 
 function loadSession(){
   q=0; firstTry=true;
-  sessionTitle.innerText="Session "+session;
+  document.getElementById("sessionTitle").innerText="Session "+session;
   next();
 }
 
@@ -47,25 +47,19 @@ function next(){
 function session1(){
   let data=s1[q];
   questionArea.innerHTML=data.q;
-  shuffle(["🐱","🐶","🐮"]).forEach(e=>{
-    makeBtn(e,e==data.a);
-  });
+  shuffle(["🐱","🐶","🐮"]).forEach(e=>makeBtn(e,e==data.a));
 }
 
 function session2(){
   let data=s2[q];
   questionArea.innerHTML=data.animal;
-  shuffle(["🍌","🥕","🦴"]).forEach(e=>{
-    makeBtn(e,e==data.food);
-  });
+  shuffle(["🍌","🥕","🦴"]).forEach(e=>makeBtn(e,e==data.food));
 }
 
 function session3(){
   let data=s3[q];
   new Audio(data.sound).play();
-  shuffle(["🐱","🐶","🐮"]).forEach(e=>{
-    makeBtn(e,e==data.a);
-  });
+  shuffle(["🐱","🐶","🐮"]).forEach(e=>makeBtn(e,e==data.a));
 }
 
 function makeBtn(txt,correct){
@@ -74,20 +68,17 @@ function makeBtn(txt,correct){
   d.innerText=txt;
   d.onclick=()=>{
     if(correct){
-      correctSnd.play();
+      correctSnd.currentTime=0;correctSnd.play();
       d.classList.add("correct");
       q++;
       if(q==3){
         if(firstTry){stars[session-1]=1; fillStar(session);}
         session++;
-        if(session==4){
-          congrats.play();
-          return;
-        }
+        if(session==4){congrats.play(); return;}
         setTimeout(loadSession,1200);
       }else setTimeout(next,700);
     }else{
-      wrongSnd.play();
+      wrongSnd.currentTime=0;wrongSnd.play();
       d.classList.add("wrong");
       firstTry=false;
     }
@@ -95,6 +86,4 @@ function makeBtn(txt,correct){
   options.appendChild(d);
 }
 
-function shuffle(a){
-  return a.sort(()=>Math.random()-.5);
-}
+function shuffle(a){return a.sort(()=>Math.random()-.5);}
