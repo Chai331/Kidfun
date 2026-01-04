@@ -20,8 +20,8 @@ const s3=[
 ];
 
 function startGame(){
-  document.getElementById("startScreen").classList.add("hide");
-  document.getElementById("gameArea").classList.remove("hide");
+  startScreen.classList.add("hide");
+  gameArea.classList.remove("hide");
   loadSession();
 }
 
@@ -32,7 +32,7 @@ function fillStar(n){
 
 function loadSession(){
   q=0; firstTry=true;
-  document.getElementById("sessionTitle").innerText="Session "+session;
+  sessionTitle.innerText="Session "+session;
   next();
 }
 
@@ -68,17 +68,17 @@ function makeBtn(txt,correct){
   d.innerText=txt;
   d.onclick=()=>{
     if(correct){
-      correctSnd.currentTime=0;correctSnd.play();
+      correctSnd.currentTime=0; correctSnd.play();
       d.classList.add("correct");
       q++;
       if(q==3){
-        if(firstTry){stars[session-1]=1; fillStar(session);}
+        if(firstTry){ stars[session-1]=1; fillStar(session); }
         session++;
-        if(session==4){congrats.play(); return;}
+        if(session==4){ congrats.play(); return; }
         setTimeout(loadSession,1200);
-      }else setTimeout(next,700);
-    }else{
-      wrongSnd.currentTime=0;wrongSnd.play();
+      } else setTimeout(next,700);
+    } else {
+      wrongSnd.currentTime=0; wrongSnd.play();
       d.classList.add("wrong");
       firstTry=false;
     }
@@ -86,4 +86,4 @@ function makeBtn(txt,correct){
   options.appendChild(d);
 }
 
-function shuffle(a){return a.sort(()=>Math.random()-.5);}
+function shuffle(a){ return a.sort(()=>Math.random()-.5); }
