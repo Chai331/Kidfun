@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Animal Matching Game</title>
+<link rel="stylesheet" href="game.css">
+</head>
+<body>
 
+<!-- STAR HUD -->
+<div id="starHUD">
+  <div class="starHole" id="s1">☆</div>
+  <div class="starHole" id="s2">☆</div>
+  <div class="starHole" id="s3">☆</div>
+</div>
+
+<!-- START SCREEN -->
+<div id="startScreen">
+  <div class="title">🐾 Animal Matching Game 🐾</div>
+  <button class="startBtn" onclick="startGame()">START</button>
+</div>
+
+<!-- GAME AREA -->
+<div id="gameArea" class="hide">
+
+  <div id="sessionTitle"></div>
+
+  <div id="questionArea"></div>
+
+  <div id="options"></div>
+
+</div>
+
+<audio id="correctSnd" src="correct.mp3"></audio>
+<audio id="wrongSnd" src="wrong.mp3"></audio>
+<audio id="congrats" src="congrats.mp3"></audio>
+
+<script src="game.js"></script>
+</body>
+</html>
