@@ -2,18 +2,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Animal Sound</title>
+<title>Session 3</title>
 <style>
-body{margin:0;background:#AEE6FF;font-family:Segoe UI;display:flex;align-items:center;justify-content:center;height:100vh;}
-.box{background:white;width:600px;padding:40px;border-radius:28px;box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;}
-.choice{margin:12px auto;width:280px;padding:18px;background:#FFE082;border-radius:16px;font-size:24px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.25);}
+body{
+  margin:0;background:#AEE6FF;font-family:Segoe UI;
+  display:flex;align-items:center;justify-content:center;height:100vh;
+}
+.box{
+  background:white;width:600px;padding:40px;border-radius:28px;
+  box-shadow:0 14px 0 rgba(0,0,0,.25);text-align:center;position:relative;
+}
+.choice{
+  margin:12px auto;width:280px;padding:20px;background:#FFE082;
+  border-radius:16px;font-size:60px;cursor:pointer;
+  box-shadow:0 6px 0 rgba(0,0,0,.25);
+}
+.bigStar{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:140px;animation:pop .8s ease-out forwards;
+}
+@keyframes pop{from{transform:scale(.2);opacity:0}to{transform:scale(1.4);opacity:1}}
+.progress{position:absolute;top:16px;right:16px;font-weight:700;}
+.sessionTitle{position:absolute;top:-40px;font-size:22px;font-weight:900;}
 </style>
 </head>
 
 <body>
 <div class="box">
-<h1>Listen & Guess</h1>
-<button onclick="snd.play()" style="font-size:32px">🔊 Play Sound</button>
+<div class="sessionTitle">SESSION 3</div>
+<div class="progress" id="prog">0 / 3</div>
+<button onclick="snd.play()" style="font-size:40px">🔊</button>
 <div id="choices"></div>
 </div>
 
@@ -22,20 +40,23 @@ const ok=new Audio("correct.mp3");
 const no=new Audio("wrong.mp3");
 
 const data=[
- {n:"Cat",f:"cat.mp3"},
- {n:"Dog",f:"dog.mp3"},
- {n:"Cow",f:"cow.mp3"}
+ {n:"Cat",e:"🐱",f:"cat.mp3"},
+ {n:"Dog",e:"🐶",f:"dog.mp3"},
+ {n:"Cow",e:"🐮",f:"cow.mp3"}
 ];
 
 let order=[0,1,2].sort(()=>Math.random()-0.5);
-let q=0,score=0;
+let q=0,perfect=0,firstTry=true;
 const snd=new Audio();
 
 function load(){
+  firstTry=true;
+  prog.innerText=`${q}/3`;
   snd.src=data[order[q]].f;
-  let opts=[data[order[q]].n];
+
+  let opts=[data[order[q]].e];
   while(opts.length<3){
-    let r=data[Math.floor(Math.random()*data.length)].n;
+    let r=data[Math.floor(Math.random()*data.length)].e;
     if(!opts.includes(r)) opts.push(r);
   }
   opts.sort(()=>Math.random()-0.5);
@@ -51,21 +72,27 @@ function load(){
 }
 
 function check(btn,a){
-  if(a==data[order[q]].n){
+  if(a==data[order[q]].e){
     ok.play();
     btn.style.background="#4CAF50";
-    score++;
+    if(firstTry) perfect++;
+    setTimeout(next,700);
   }else{
     no.play();
     btn.style.background="#FF6B6B";
+    firstTry=false;
   }
-  setTimeout(next,700);
 }
 
 function next(){
   q++;
-  if(q==3){ localStorage.s3=score; location.href="result.html"; }
-  else load();
+  if(q==3){
+    if(perfect==3){
+      document.querySelector(".box").innerHTML+="<div class='bigStar'>🌟</div>";
+      localStorage.star3=1;
+    }else localStorage.star3=0;
+    setTimeout(()=>location.href="result.html",1400);
+  }else load();
 }
 load();
 </script>
