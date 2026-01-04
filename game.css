@@ -1,0 +1,57 @@
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#FFF8DC;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+#starHUD{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%);
+  display:flex;gap:20px;
+}
+
+.starHole{
+  width:60px;height:60px;
+  border-radius:50%;
+  border:4px solid gold;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+  background:white;
+}
+
+.starFill{animation:pop .5s;}
+
+@keyframes pop{0%{transform:scale(.2)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+
+#startScreen{text-align:center}
+.startBtn{
+  padding:20px 60px;
+  font-size:40px;
+  border-radius:20px;
+  border:none;
+  background:#FFCC00;
+}
+
+#gameArea{text-align:center}
+.hide{display:none}
+
+#sessionTitle{font-size:42px;margin-bottom:20px}
+
+#questionArea{font-size:100px;margin:30px}
+
+#options{display:flex;gap:20px;justify-content:center}
+
+.opt{
+  background:white;
+  padding:20px 40px;
+  border-radius:20px;
+  font-size:40px;
+  cursor:pointer;
+  box-shadow:0 8px 0 rgba(0,0,0,.25);
+}
+.opt.correct{background:#7CFF7C}
+.opt.wrong{background:#FF7C7C}
