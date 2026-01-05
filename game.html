@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Animal Matching Game</title>
+<title>Animal Game</title>
 <link rel="stylesheet" href="game.css">
 </head>
 <body>
@@ -14,19 +14,20 @@
 </div>
 
 <div id="startScreen">
-  <div class="title">🐾 Animal Matching Game 🐾</div>
+  <h1>🐾 Animal Game 🐾</h1>
   <button class="startBtn" onclick="startGame()">START</button>
 </div>
 
 <div id="gameArea" class="hide">
   <div id="sessionTitle"></div>
-  <div id="questionArea"></div>
+  <div id="progress"></div>
+  <div id="question"></div>
   <div id="options"></div>
 </div>
 
 <audio id="correctSnd" src="correct.mp3"></audio>
 <audio id="wrongSnd" src="wrong.mp3"></audio>
-<audio id="congrats" src="congrats.mp3"></audio>
+<audio id="congratsSnd" src="congrats.mp3"></audio>
 
 <script src="game.js"></script>
 </body>
