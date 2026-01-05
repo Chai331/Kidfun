@@ -5,6 +5,7 @@
 <title>Main Menu</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <audio id="bgm" src="bgm.mp3" loop></audio>
@@ -14,21 +15,29 @@
 
 <div class="stage">
 
-  <img src="cloud.png" class="cloud">
-
-  <div class="btn story" onclick="playClick(); openStory()">STORY 📖</div>
-  <div class="btn game" onclick="playClick(); openGame()">GAME 🎮</div>
+  <div class="btn story" onclick="openStory()">STORY 📖</div>
+  <div class="btn game" onclick="openGame()">GAME 🎮</div>
 
   <div id="storyPage" class="slide left">
     <div class="pageTitle">STORY 📖</div>
-    <div class="pageBtn storySub" onclick="playClick(); location.href='bird.html'">🐦 The Bird Shares Its Food</div>
-    <div class="pageBtn storySub" onclick="playClick(); location.href='duck.html'">🦆 The Duck Helps The Fish</div>
+    <div class="pageBtn storySub" onclick="playClick(); location.href='bird.html'">
+      🐦 The Bird Shares Its Food
+    </div>
+    <div class="pageBtn storySub" onclick="playClick(); location.href='duck.html'">
+      🦆 The Duck Helps The Fish
+    </div>
   </div>
 
   <div id="gamePage" class="slide right">
     <div class="pageTitle">GAME 🎮</div>
-    <div class="pageBtn gameSub" onclick="playClick(); location.href='animal.html'">🐾 Animal Game</div>
-    <div class="pageBtn gameSub">🧩 Puzzle Game (Coming Soon)</div>
+
+    <div class="pageBtn gameSub" onclick="playClick(); location.href='game.html'">
+      🐾 Animal Game
+    </div>
+
+    <div class="pageBtn gameSub">
+      🧩 Puzzle Game (Coming Soon)
+    </div>
   </div>
 
 </div>
@@ -52,20 +61,12 @@ function playClick(){
 
 function toggleMusic(){
   playClick();
-  if(playing){bgm.pause();musicBtn.textContent="🔇";}
-  else{bgm.play();musicBtn.textContent="🔈";}
+  if(playing){
+    bgm.pause();
+    musicBtn.textContent = "🔇";
+  }else{
+    bgm.play();
+    musicBtn.textContent = "🔈";
+  }
   playing = !playing;
 }
-
-function openStory(){
-  storyPage.classList.add("show");
-  gamePage.classList.remove("show");
-}
-function openGame(){
-  gamePage.classList.add("show");
-  storyPage.classList.remove("show");
-}
-</script>
-
-</body>
-</html>
