@@ -44,20 +44,27 @@ function next(){
   if(session==3)session3();
 }
 
+/* SESSION 1 — Guess Animal */
 function session1(){
   let data=s1[q];
-  questionArea.innerHTML=data.q;
+  questionArea.innerHTML =
+    "<div style='font-size:32px'>What animal is this?</div>"+data.q;
   shuffle(["🐱","🐶","🐮"]).forEach(e=>makeBtn(e,e==data.a));
 }
 
+/* SESSION 2 — Match Food */
 function session2(){
   let data=s2[q];
-  questionArea.innerHTML=data.animal;
+  questionArea.innerHTML =
+    "<div style='font-size:32px'>Which food does it eat?</div>"+data.animal;
   shuffle(["🍌","🥕","🦴"]).forEach(e=>makeBtn(e,e==data.food));
 }
 
+/* SESSION 3 — Guess by Sound */
 function session3(){
   let data=s3[q];
+  questionArea.innerHTML =
+    "<div style='font-size:32px'>Which animal makes this sound?</div>🔊";
   new Audio(data.sound).play();
   shuffle(["🐱","🐶","🐮"]).forEach(e=>makeBtn(e,e==data.a));
 }
