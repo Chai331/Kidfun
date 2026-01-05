@@ -1,22 +1,22 @@
-let session=1, q=0, firstTry=true;
-let stars=[0,0,0];
+let session=1,q=0,firstTry=true;
+const stars=[0,0,0];
 
 const s1=[
-  {q:"🐱",a:"🐱"},
-  {q:"🐶",a:"🐶"},
-  {q:"🐮",a:"🐮"}
+ {q:"🐱",a:"🐱"},
+ {q:"🐶",a:"🐶"},
+ {q:"🐮",a:"🐮"}
 ];
 
 const s2=[
-  {animal:"🐵",food:"🍌"},
-  {animal:"🐰",food:"🥕"},
-  {animal:"🐶",food:"🦴"}
+ {q:"🐵",a:"🍌",opts:["🍌","🥕","🦴"]},
+ {q:"🐰",a:"🥕",opts:["🥕","🍎","🍌"]},
+ {q:"🐶",a:"🦴",opts:["🍗","🦴","🥕"]}
 ];
 
 const s3=[
-  {sound:"cat.mp3",a:"🐱"},
-  {sound:"dog.mp3",a:"🐶"},
-  {sound:"cow.mp3",a:"🐮"}
+ {q:"🔊",a:"🐱",sound:"cat.mp3"},
+ {q:"🔊",a:"🐶",sound:"dog.mp3"},
+ {q:"🔊",a:"🐮",sound:"cow.mp3"}
 ];
 
 function startGame(){
@@ -26,71 +26,49 @@ function startGame(){
 }
 
 function fillStar(n){
-  document.getElementById("s"+n).innerHTML="🌟";
-  document.getElementById("s"+n).classList.add("starFill");
+ document.getElementById("s"+n).innerHTML="🌟";
+ document.getElementById("s"+n).classList.add("starFill");
 }
 
 function loadSession(){
-  q=0; firstTry=true;
-  sessionTitle.innerText="Session "+session;
-  next();
+ q=0;firstTry=true;
+ sessionTitle.innerText="SESSION "+session;
+ loadQuestion();
 }
 
-function next(){
-  options.innerHTML="";
-  questionArea.innerHTML="";
-  if(session==1)session1();
-  if(session==2)session2();
-  if(session==3)session3();
-}
-
-/* SESSION 1 — Guess Animal */
-function session1(){
-  let data=s1[q];
-  questionArea.innerHTML =
-    "<div style='font-size:32px'>What animal is this?</div>"+data.q;
-  shuffle(["🐱","🐶","🐮"]).forEach(e=>makeBtn(e,e==data.a));
-}
-
-/* SESSION 2 — Match Food */
-function session2(){
-  let data=s2[q];
-  questionArea.innerHTML =
-    "<div style='font-size:32px'>Which food does it eat?</div>"+data.animal;
-  shuffle(["🍌","🥕","🦴"]).forEach(e=>makeBtn(e,e==data.food));
-}
-
-/* SESSION 3 — Guess by Sound */
-function session3(){
-  let data=s3[q];
-  questionArea.innerHTML =
-    "<div style='font-size:32px'>Which animal makes this sound?</div>🔊";
-  new Audio(data.sound).play();
-  shuffle(["🐱","🐶","🐮"]).forEach(e=>makeBtn(e,e==data.a));
+function loadQuestion(){
+ options.innerHTML="";
+ progress.innerText=(q+1)+"/3";
+ let data=[null,s1,s2,s3][session][q];
+ question.innerHTML=data.q;
+ if(session==3)new Audio(data.sound).play();
+ shuffle((data.opts||["🐱","🐶","🐮"])).forEach(e=>{
+   makeBtn(e,e==data.a);
+ });
 }
 
 function makeBtn(txt,correct){
-  let d=document.createElement("div");
-  d.className="opt";
-  d.innerText=txt;
-  d.onclick=()=>{
-    if(correct){
-      correctSnd.currentTime=0; correctSnd.play();
-      d.classList.add("correct");
-      q++;
-      if(q==3){
-        if(firstTry){ stars[session-1]=1; fillStar(session); }
-        session++;
-        if(session==4){ congrats.play(); return; }
-        setTimeout(loadSession,1200);
-      } else setTimeout(next,700);
-    } else {
-      wrongSnd.currentTime=0; wrongSnd.play();
-      d.classList.add("wrong");
-      firstTry=false;
-    }
-  }
-  options.appendChild(d);
+ let b=document.createElement("div");
+ b.className="opt";
+ b.innerText=txt;
+ b.onclick=()=>{
+   if(correct){
+     correctSnd.play();
+     b.classList.add("correct");
+     q++;
+     if(q==3){
+       if(firstTry){fillStar(session)}
+       session++;
+       if(session==4){congratsSnd.play();return;}
+       setTimeout(loadSession,1200);
+     }else setTimeout(loadQuestion,800);
+   }else{
+     wrongSnd.play();
+     b.classList.add("wrong");
+     firstTry=false;
+   }
+ }
+ options.appendChild(b);
 }
 
-function shuffle(a){ return a.sort(()=>Math.random()-.5); }
+function shuffle(a){return a.sort(()=>Math.random()-.5);}
