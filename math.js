@@ -1,80 +1,60 @@
-const startScreen = document.getElementById("startScreen");
-const cd = document.getElementById("countdown");
-const game = document.getElementById("game");
-
-const timeBox = document.getElementById("time");
-const scoreBox = document.getElementById("score");
-const comboBox = document.getElementById("combo");
-const ball = document.getElementById("ball");
-const hoops = document.querySelectorAll(".hoop");
-
-let time = 300;
-let score = 0;
-let combo = 0;
-let correctStreak = 0;
-let timer;
+let time=300, score=0, combo=0, answer=0, timer;
 
 function startGame(){
-  startScreen.style.display="none";
-  cd.style.display="flex";
-  let n=3;
-  cd.innerText=n;
-  let t = setInterval(()=>{
-    n--;
-    if(n==0){
-      clearInterval(t);
-      cd.style.display="none";
-      game.style.display="block";
-      startTimer();
-      newQuestion();
-    }else cd.innerText=n;
+  document.getElementById("startScreen").classList.add("hide");
+  document.getElementById("gameScreen").classList.remove("hide");
+
+  let c=3;
+  ball.innerText="START IN "+c;
+  let cd=setInterval(()=>{
+    c--;
+    if(c==0){
+      clearInterval(cd);
+      nextQ();
+      timer=setInterval(count,1000);
+    }else ball.innerText="START IN "+c;
   },1000);
 }
 
-function startTimer(){
-  timer = setInterval(()=>{
-    time--;
-    timeBox.innerText=time;
-    if(time<=0){
-      clearInterval(timer);
-      alert("Game Over!\nYour Score: "+score);
-      location.reload();
-    }
-  },1000);
+function count(){
+  time--;
+  time<=0 && endGame();
+  document.getElementById("time").innerText=time;
 }
 
-function newQuestion(){
-  let a = Math.floor(Math.random()*5)+1;
-  let b = Math.floor(Math.random()*5)+1;
-  let ans = a+b;
-  ball.innerText = a+" + "+b;
+function endGame(){
+  clearInterval(timer);
+  ball.innerText="GAME OVER!";
+  hoops.innerHTML="";
+}
 
-  let opts = [ans, ans+1, ans-1];
+function nextQ(){
+  let a=Math.floor(Math.random()*10);
+  let b=Math.floor(Math.random()*10);
+  answer=a+b;
+  ball.innerText=`${a} + ${b} = ?`;
+
+  let opts=[answer];
+  while(opts.length<3){
+    let r=answer + Math.floor(Math.random()*7)-3;
+    if(r>=0 && !opts.includes(r)) opts.push(r);
+  }
   opts.sort(()=>Math.random()-0.5);
 
-  hoops.forEach((h,i)=>{
-    h.innerText = opts[i];
-    h.dataset.correct = opts[i]==ans;
-  });
+  document.querySelectorAll(".hoop").forEach((h,i)=>h.innerText=opts[i]);
 }
 
-function choose(i){
-  if(hoops[i].dataset.correct=="true"){
-    correctStreak++;
-
-    let gain = 10;
-    if(correctStreak>=4){
-      combo = (correctStreak-3)*10;
-      gain += combo;
-      comboBox.innerText = "🔥 COMBO +" + combo;
-    }else comboBox.innerText="";
-
-    score += gain;
-    scoreBox.innerText=score;
+function choose(el){
+  if(time<=0) return;
+  let v=parseInt(el.innerText);
+  if(v==answer){
+    combo++;
+    let bonus= combo>3 ? (combo-3)*10 : 0;
+    score += 10 + bonus;
   }else{
-    correctStreak = 0;
-    combo = 0;
-    comboBox.innerText="";
+    combo=0;
   }
-  newQuestion();
+  document.getElementById("score").innerText=score;
+  document.getElementById("combo").innerText=combo;
+  nextQ();
 }
