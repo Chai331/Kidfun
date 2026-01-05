@@ -1,71 +1,61 @@
 body{
   margin:0;
-  background:linear-gradient(#7ec8ff,#c8ffb0);
+  background:#BEEBFF;
   font-family:Comic Sans MS;
-  text-align:center;
-}
-
-#startScreen, #countdown{
-  position:fixed;
-  inset:0;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
-  background:rgba(0,0,0,.6);
-  color:white;
-  z-index:10;
+  height:100vh;
 }
 
-#startScreen button{
-  font-size:36px;
-  padding:20px 60px;
-  border-radius:20px;
+#startScreen{text-align:center}
+
+button{
+  padding:22px 60px;
+  font-size:40px;
   border:none;
-  background:#ffcc00;
+  border-radius:22px;
+  background:#FFD700;
+  box-shadow:0 6px 0 #C9A000;
   cursor:pointer;
 }
+button:active{transform:translateY(6px);box-shadow:0 2px 0 #C9A000}
 
-#countdown{display:none;font-size:120px;}
+.hide{display:none}
 
-#game{display:none;padding-top:30px;}
-
-#topBar{
-  font-size:26px;
-  margin-bottom:20px;
+#hud{
+  font-size:24px;
+  margin-bottom:15px;
 }
 
-#combo{color:red;margin-left:20px;font-weight:bold;}
-
 #ball{
-  width:130px;
-  height:130px;
-  margin:0 auto 30px;
-  background:orange;
+  width:260px;
+  height:260px;
   border-radius:50%;
+  background:orange;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:34px;
+  font-size:46px;
   color:white;
-  font-weight:bold;
+  margin:20px auto;
 }
 
 #hoops{
   display:flex;
-  justify-content:center;
-  gap:40px;
+  gap:30px;
 }
 
 .hoop{
-  width:120px;
-  height:120px;
-  border:8px solid red;
-  border-radius:50%;
-  font-size:36px;
-  background:white;
+  width:150px;
+  height:90px;
+  border:6px solid #333;
+  border-radius:0 0 70px 70px;
   display:flex;
   align-items:center;
   justify-content:center;
+  font-size:32px;
   cursor:pointer;
+  background:white;
 }
+.hoop:active{background:#FFE082}
