@@ -7,32 +7,38 @@
 </head>
 <body>
 
+<div id="starHUD">
+  <div class="starHole" id="s1">☆</div>
+  <div class="starHole" id="s2">☆</div>
+  <div class="starHole" id="s3">☆</div>
+</div>
+
+<!-- START -->
 <div id="startScreen">
-  <h1>🐾 ANIMAL GAME 🐾</h1>
+  <h1>🐾 Animal Game 🐾</h1>
   <button class="startBtn" onclick="startGame()">START</button>
 </div>
 
+<!-- GAME -->
 <div id="gameArea" class="hide">
-
-  <!-- STAR BAR (above question) -->
-  <div id="starHUD">
-    <div class="starHole" id="s1">☆</div>
-    <div class="starHole" id="s2">☆</div>
-    <div class="starHole" id="s3">☆</div>
-  </div>
-
+  <button id="quitBtn" onclick="quitGame()">⬅ Quit</button>
   <div id="sessionTitle"></div>
   <div id="progress"></div>
-  <div id="hint"></div>
   <div id="question"></div>
   <div id="options"></div>
+</div>
 
+<!-- RESULT -->
+<div id="resultScreen" class="hide">
+  <h1 id="resultText"></h1>
+  <div id="resultStars"></div>
+  <button class="menuBtn" onclick="location.href='index.html'">Back To Menu</button>
 </div>
 
 <audio id="correctSnd" src="correct.mp3"></audio>
 <audio id="wrongSnd" src="wrong.mp3"></audio>
 <audio id="congratsSnd" src="congrats.mp3"></audio>
 
-<script src="game.js" defer></script>
+<script src="game.js"></script>
 </body>
 </html>
