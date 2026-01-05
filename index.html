@@ -42,10 +42,6 @@
 
 </div>
 
-<!-- 🎆 Firework Button -->
-<button id="fireworkBtn" class="firework-btn">🎆</button>
-<div id="firework"></div>
-
 <script>
 const bgm = document.getElementById("bgm");
 const click = document.getElementById("clickSound");
@@ -80,15 +76,12 @@ function openStory(){
   storyPage.classList.add("show");
   gamePage.classList.remove("show");
 }
-
 function openGame(){
   playClick();
   gamePage.classList.add("show");
   storyPage.classList.remove("show");
 }
 </script>
-
-<script src="firework.js"></script>
 
 </body>
 </html>
