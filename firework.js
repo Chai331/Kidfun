@@ -3,14 +3,11 @@ const firework = document.getElementById("firework");
 
 if (fireworkBtn && firework) {
   fireworkBtn.addEventListener("click", () => {
+
+    // restart animation every click
+    firework.classList.remove("active");
+    void firework.offsetWidth; // force reflow
     firework.classList.add("active");
 
-    setTimeout(() => {
-      firework.classList.remove("active");
-    }, 1000);
-
-    // play only once
-    fireworkBtn.disabled = true;
-    fireworkBtn.style.opacity = "0.5";
   });
 }
