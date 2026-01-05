@@ -1,83 +1,93 @@
-body{
+html,body{
   margin:0;
-  font-family: "Comic Sans MS", "Poppins", cursive;
-  background: linear-gradient(#87CEEB,#E0FFFF);
+  width:100%;
+  height:100%;
   overflow:hidden;
+  font-family:Segoe UI;
 }
 
 .stage{
   width:100vw;
   height:100vh;
+  background:url("1.jpg") no-repeat center;
+  background-size:cover;
   position:relative;
 }
 
+/* MAIN BUTTONS */
+.btn{
+  position:absolute;
+  padding:26px 56px;
+  border-radius:20px;
+  font-size:50px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  cursor:pointer;
+  box-shadow:0 10px 0 rgba(0,0,0,.28);
+  transition:.1s;
+  z-index:10;
+}
+.btn:active{
+  transform:translateY(7px);
+  box-shadow:0 3px 0 rgba(0,0,0,.28);
+}
+
+.story{ left:1000px; top:250px; background:#FFF3B0; color:#8C8C32; }
+.game{ right:575px; top:400px; background:#CFEAFF; color:#3A6F94; }
+
+/* SLIDE PANELS */
+.slide{
+  position:absolute;
+  top:80px;
+  bottom:40px;
+  width:420px;
+  padding:28px;
+  border-radius:28px;
+  box-shadow:0 20px 0 rgba(0,0,0,.25);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  transition:.45s cubic-bezier(.3,1.3,.4,1);
+  z-index:5;
+}
+
+.left{ left:-480px; background:#FFF3B0; }
+.right{ right:-480px; background:#D9EEFF; }
+
+.left.show{ left:40px; }
+.right.show{ right:40px; }
+
+/* PANEL CONTENT */
+.pageTitle{
+  font-size:36px;
+  font-weight:900;
+}
+
+.pageBtn{
+  background:white;
+  padding:20px;
+  border-radius:14px;
+  cursor:pointer;
+  box-shadow:0 7px 0 rgba(0,0,0,.25);
+  transition:.1s;
+}
+.pageBtn:active{
+  transform:translateY(5px);
+  box-shadow:0 2px 0 rgba(0,0,0,.25);
+}
+
+/* MUSIC BUTTON */
 #musicBtn{
   position:fixed;
   top:20px;
   right:20px;
-  background:#fff;
-  padding:10px 15px;
+  font-size:34px;
+  background:rgba(0,0,0,.45);
+  color:white;
+  padding:14px 18px;
   border-radius:50%;
-  font-size:24px;
   cursor:pointer;
-  box-shadow:0 5px 0 #ccc;
+  z-index:99;
 }
-
-.btn{
-  position:absolute;
-  right:80px;
-  width:240px;
-  padding:22px;
-  border-radius:20px;
-  font-size:32px;
-  text-align:center;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 8px 0 rgba(0,0,0,0.2);
-  transition:.2s;
-}
-
-.btn:hover{ transform:scale(1.05); }
-
-.story{
-  top:40%;
-  background:#FFF3A0;
-}
-
-.game{
-  top:55%;
-  background:#D7F0FF;
-}
-
-.slide{
-  position:absolute;
-  top:0;
-  width:100%;
-  height:100%;
-  background:rgba(255,255,255,0.7);
-  transform:translateX(-100%);
-  transition:.4s;
-}
-
-.slide.right{ transform:translateX(100%); }
-
-.slide.show{ transform:translateX(0); }
-
-.pageTitle{
-  margin:40px;
-  font-size:40px;
-  font-weight:bold;
-}
-
-.pageBtn{
-  margin:30px;
-  background:#fff;
-  border-radius:15px;
-  padding:20px;
-  width:300px;
-  font-size:22px;
-  box-shadow:0 5px 0 rgba(0,0,0,0.2);
-  cursor:pointer;
-}
-
-.pageBtn:hover{ background:#FFE; }
