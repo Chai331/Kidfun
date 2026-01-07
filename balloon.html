@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Balloon Game</title>
+<link rel="stylesheet" href="balloon.css">
+</head>
+<body>
+
+<div id="startScreen">
+  <div class="logo">🎈 POP THE BALLOON 🎈</div>
+  <button onclick="startGame()">START</button>
+</div>
+
+<div id="hud" class="hide">
+  <div>⏰ <span id="time">180</span>s</div>
+  <div>⭐ <span id="score">0</span></div>
+</div>
+
+<div id="gameArea" class="hide"></div>
+
+<div id="endScreen" class="hide">
+  <h1 id="resultText"></h1>
+  <button onclick="location.href='index.html'">BACK TO MENU</button>
+</div>
+
+<audio id="pop" src="pop.mp3"></audio>
+<audio id="wrong" src="wrong.mp3"></audio>
+
+<script src="balloon.js"></script>
+</body>
+</html>
