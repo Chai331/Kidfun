@@ -1,60 +1,67 @@
 let time=300, score=0, combo=0, answer=0, timer;
 
-function startGame(){
-  document.getElementById("startScreen").classList.add("hide");
-  document.getElementById("gameScreen").classList.remove("hide");
-
+function startCountdown(){
+  startScreen.style.display="none";
+  countdownScreen.classList.remove("hide");
   let c=3;
-  ball.innerText="START IN "+c;
+  countNum.innerText=c;
   let cd=setInterval(()=>{
     c--;
-    if(c==0){
+    countNum.innerText=c||"GO!";
+    if(c<0){
       clearInterval(cd);
-      nextQ();
-      timer=setInterval(count,1000);
-    }else ball.innerText="START IN "+c;
+      countdownScreen.classList.add("hide");
+      startGame();
+    }
   },1000);
 }
 
-function count(){
-  time--;
-  time<=0 && endGame();
-  document.getElementById("time").innerText=time;
+function startGame(){
+  gameArea.classList.remove("hide");
+  newQuestion();
+  timer=setInterval(()=>{
+    time--;
+    timeSpan.innerText=time;
+    if(time<=0)endGame();
+  },1000);
+}
+
+function newQuestion(){
+  let a=Math.floor(Math.random()*10);
+  let b=Math.floor(Math.random()*10);
+  answer=a+b;
+  question.innerText=a+" + "+b;
+
+  let arr=[answer,answer+Math.floor(Math.random()*5+1),answer-Math.floor(Math.random()*5+1)];
+  arr.sort(()=>Math.random()-.5);
+
+  document.querySelectorAll(".hoop").forEach((h,i)=>{
+    h.className="hoop";
+    h.querySelector("span").innerText=arr[i];
+    h.onclick=()=>check(arr[i],h);
+  });
+}
+
+function check(val,h){
+  if(val==answer){
+    good.play();
+    combo++;
+    score+=10+(combo>3?(combo-3)*10:0);
+    scoreSpan.innerText=score;
+    h.classList.add("good");
+  }else{
+    bad.play();
+    combo=0;
+    h.classList.add("bad");
+  }
+  setTimeout(newQuestion,600);
 }
 
 function endGame(){
   clearInterval(timer);
-  ball.innerText="GAME OVER!";
-  hoops.innerHTML="";
-}
-
-function nextQ(){
-  let a=Math.floor(Math.random()*10);
-  let b=Math.floor(Math.random()*10);
-  answer=a+b;
-  ball.innerText=`${a} + ${b} = ?`;
-
-  let opts=[answer];
-  while(opts.length<3){
-    let r=answer + Math.floor(Math.random()*7)-3;
-    if(r>=0 && !opts.includes(r)) opts.push(r);
-  }
-  opts.sort(()=>Math.random()-0.5);
-
-  document.querySelectorAll(".hoop").forEach((h,i)=>h.innerText=opts[i]);
-}
-
-function choose(el){
-  if(time<=0) return;
-  let v=parseInt(el.innerText);
-  if(v==answer){
-    combo++;
-    let bonus= combo>3 ? (combo-3)*10 : 0;
-    score += 10 + bonus;
-  }else{
-    combo=0;
-  }
-  document.getElementById("score").innerText=score;
-  document.getElementById("combo").innerText=combo;
-  nextQ();
+  end.play();
+  gameArea.classList.add("hide");
+  endScreen.classList.remove("hide");
+  finalScore.innerText=score;
+  finalText.innerText=score>=200?"Excellent! 🌟":score>=100?"Good! 😊":"Nice! 👍";
 }
