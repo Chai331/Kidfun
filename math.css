@@ -1,61 +1,85 @@
 body{
   margin:0;
-  background:#BEEBFF;
-  font-family:Comic Sans MS;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+  background:linear-gradient(#7fd3ff,#fff4b3);
+  font-family:'Comic Sans MS';
+  text-align:center;
 }
-
-#startScreen{text-align:center}
-
-button{
-  padding:22px 60px;
-  font-size:40px;
-  border:none;
-  border-radius:22px;
-  background:#FFD700;
-  box-shadow:0 6px 0 #C9A000;
-  cursor:pointer;
-}
-button:active{transform:translateY(6px);box-shadow:0 2px 0 #C9A000}
-
-.hide{display:none}
 
 #hud{
-  font-size:24px;
-  margin-bottom:15px;
+  font-size:28px;
+  padding:15px;
+}
+
+#startScreen button{
+  font-size:50px;
+  padding:20px 70px;
+  border-radius:30px;
+  border:none;
+  background:#ffcc00;
+  box-shadow:0 10px 0 #e1b12c;
 }
 
 #ball{
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background:orange;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:46px;
-  color:white;
-  margin:20px auto;
+  font-size:130px;
+  margin-top:20px;
+}
+
+#ball span{
+  display:block;
+  font-size:50px;
+  font-weight:bold;
 }
 
 #hoops{
   display:flex;
-  gap:30px;
+  justify-content:center;
+  gap:40px;
+  margin-top:40px;
 }
 
 .hoop{
-  width:150px;
-  height:90px;
-  border:6px solid #333;
-  border-radius:0 0 70px 70px;
+  width:140px;
+  height:160px;
+  background:#ffeaa7;
+  border-radius:30px;
+  box-shadow:0 10px 0 #fdcb6e;
+  font-size:70px;
+  cursor:pointer;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  font-size:32px;
-  cursor:pointer;
-  background:white;
+  transition:.2s;
 }
-.hoop:active{background:#FFE082}
+
+.hoop span{font-size:38px;font-weight:bold}
+
+.hoop:hover{transform:scale(1.1)}
+
+.hoop.good{background:#55efc4;box-shadow:0 10px 0 #00b894}
+.hoop.bad{background:#ff7675;box-shadow:0 10px 0 #d63031}
+
+@keyframes pop{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.3)}
+  100%{transform:scale(1)}
+}
+.hoop.good,.hoop.bad{animation:pop .4s}
+
+.countdown{
+  position:fixed;inset:0;
+  background:linear-gradient(#7fd3ff,#fff4b3);
+  display:flex;align-items:center;justify-content:center;
+  z-index:999;
+}
+.bubble{
+  width:260px;height:260px;border-radius:50%;
+  background:#ff7675;color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-size:140px;font-weight:bold;
+  box-shadow:0 20px 0 #d63031;
+  animation:bounce .6s infinite alternate;
+}
+@keyframes bounce{from{transform:scale(.9)}to{transform:scale(1.1)}}
+
+.hide{display:none}
