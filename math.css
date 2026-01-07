@@ -1,81 +1,49 @@
 body{
   margin:0;
-  background:#9be7ff;
-  font-family:'Comic Sans MS';
-  text-align:center;
+  background:linear-gradient(#AEE7FF,#FFF);
+  overflow:hidden;
+  font-family:Comic Sans MS;
+}
+
+#startScreen,#endScreen{
+  position:absolute;inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+#startScreen button,#endScreen button{
+  font-size:40px;
+  padding:20px 60px;
+  border-radius:30px;
+  border:none;
+  background:#FF6F91;
+  color:white;
+  box-shadow:0 8px 0 #C94C69;
 }
 
 #hud{
-  font-size:26px;
-  padding:10px;
-  background:#fff;
-  border-bottom:5px solid #74b9ff;
+  position:fixed;top:15px;width:100%;
+  display:flex;justify-content:space-around;
+  font-size:28px;font-weight:bold;
 }
-
-#startScreen button{
-  font-size:46px;
-  padding:18px 70px;
-  border-radius:25px;
-  border:none;
-  background:#ffcc00;
-  box-shadow:0 8px 0 #e1b12c;
-}
-
-#ball{
-  font-size:120px;
-  margin-top:20px;
-  transition:.6s cubic-bezier(.68,-0.6,.32,1.6);
-}
-
-#ball.fly{
-  transform:translateY(-180px) scale(.6);
-}
-
-#ball span{
-  display:block;
-  font-size:44px;
-  font-weight:bold;
-}
-
-#hoops{
-  display:flex;
-  justify-content:center;
-  gap:40px;
-  margin-top:40px;
-}
-
-.hoop{
-  width:140px;
-  height:150px;
-  background:#ffeaa7;
-  border-radius:30px;
-  box-shadow:0 8px 0 #fdcb6e;
-  font-size:60px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.hoop span{font-size:34px;font-weight:bold}
-
-.hoop.good{background:#55efc4}
-.hoop.bad{background:#ff7675}
-
-.countdown{
-  position:fixed;inset:0;
-  background:#9be7ff;
-  display:flex;align-items:center;justify-content:center;
-}
-
-.bubble{
-  width:160px;height:160px;border-radius:50%;
-  background:#ff7675;color:white;
-  font-size:90px;
-  display:flex;align-items:center;justify-content:center;
-  animation:bounce .5s infinite alternate;
-}
-
-@keyframes bounce{from{transform:scale(.9)}to{transform:scale(1.05)}}
 
 .hide{display:none}
+
+.balloon{
+  position:absolute;
+  bottom:-150px;
+  width:120px;height:150px;
+  background:radial-gradient(circle at 30% 30%,#fff,#ff4d6d);
+  border-radius:50% 50% 50% 50%;
+  display:flex;justify-content:center;align-items:center;
+  font-size:36px;color:white;font-weight:bold;
+  cursor:pointer;
+  animation:float 14s linear forwards;
+}
+
+@keyframes float{
+  to{transform:translateY(-110vh)}
+}
+
