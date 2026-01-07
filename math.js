@@ -1,4 +1,4 @@
-let time=300, score=0, combo=0, answer=0, timer;
+let time=180, score=0, combo=0, answer=0, timer;
 
 function startCountdown(){
   startScreen.style.display="none";
@@ -7,7 +7,7 @@ function startCountdown(){
   countNum.innerText=c;
   let cd=setInterval(()=>{
     c--;
-    countNum.innerText=c||"GO!";
+    countNum.innerText=c>0?c:"GO!";
     if(c<0){
       clearInterval(cd);
       countdownScreen.classList.add("hide");
@@ -27,34 +27,40 @@ function startGame(){
 }
 
 function newQuestion(){
+  ball.classList.remove("fly");
+
   let a=Math.floor(Math.random()*10);
   let b=Math.floor(Math.random()*10);
   answer=a+b;
   question.innerText=a+" + "+b;
 
-  let arr=[answer,answer+Math.floor(Math.random()*5+1),answer-Math.floor(Math.random()*5+1)];
+  let arr=[answer,answer+Math.floor(Math.random()*4+1),answer-Math.floor(Math.random()*4+1)];
   arr.sort(()=>Math.random()-.5);
 
   document.querySelectorAll(".hoop").forEach((h,i)=>{
     h.className="hoop";
     h.querySelector("span").innerText=arr[i];
-    h.onclick=()=>check(arr[i],h);
+    h.onclick=()=>throwBall(arr[i],h);
   });
 }
 
-function check(val,h){
-  if(val==answer){
-    good.play();
-    combo++;
-    score+=10+(combo>3?(combo-3)*10:0);
-    scoreSpan.innerText=score;
-    h.classList.add("good");
-  }else{
-    bad.play();
-    combo=0;
-    h.classList.add("bad");
-  }
-  setTimeout(newQuestion,600);
+function throwBall(val,hoop){
+  ball.classList.add("fly");
+
+  setTimeout(()=>{
+    if(val==answer){
+      good.play();
+      combo++;
+      score+=10+(combo>3?(combo-3)*10:0);
+      scoreSpan.innerText=score;
+      hoop.classList.add("good");
+    }else{
+      bad.play();
+      combo=0;
+      hoop.classList.add("bad");
+    }
+    setTimeout(newQuestion,500);
+  },500);
 }
 
 function endGame(){
