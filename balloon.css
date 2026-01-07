@@ -1,32 +1,48 @@
 body{
   margin:0;
-  background:linear-gradient(#AEE7FF,#FFF);
+  background:linear-gradient(#BEE9FF,#FFFFFF);
   overflow:hidden;
-  font-family:Comic Sans MS;
+  font-family:'Comic Sans MS',cursive;
 }
 
 #startScreen,#endScreen{
-  position:absolute;inset:0;
+  position:absolute;
+  inset:0;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+}
+
+#startScreen h1{
+  font-size:60px;
+  color:#ff5b7f;
+  margin-bottom:20px;
 }
 
 #startScreen button,#endScreen button{
   font-size:40px;
   padding:20px 60px;
-  border-radius:30px;
   border:none;
-  background:#FF6F91;
+  border-radius:40px;
+  background:#ff7fa3;
   color:white;
-  box-shadow:0 8px 0 #C94C69;
+  box-shadow:0 8px 0 #d94b70;
 }
 
 #hud{
-  position:fixed;top:15px;width:100%;
-  display:flex;justify-content:space-around;
-  font-size:28px;font-weight:bold;
+  position:fixed;
+  top:10px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:0 30px;
+  font-size:26px;
+}
+
+#gameArea{
+  position:absolute;
+  inset:0;
 }
 
 .hide{display:none}
@@ -34,16 +50,19 @@ body{
 .balloon{
   position:absolute;
   bottom:-150px;
-  width:120px;height:150px;
-  background:radial-gradient(circle at 30% 30%,#fff,#ff4d6d);
-  border-radius:50% 50% 50% 50%;
-  display:flex;justify-content:center;align-items:center;
-  font-size:36px;color:white;font-weight:bold;
+  width:110px;
+  height:150px;
+  background:radial-gradient(circle at 30% 30%,#fff,#ff6b8b);
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:36px;
+  color:white;
   cursor:pointer;
-  animation:float 14s linear forwards;
+  animation:float 12s linear forwards;
 }
 
 @keyframes float{
-  to{transform:translateY(-110vh)}
+  to{transform:translateY(-120vh)}
 }
-
