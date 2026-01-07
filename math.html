@@ -7,26 +7,39 @@
 </head>
 <body>
 
+<div id="hud">
+  ⏱ Time: <span id="time">300</span>s
+  ⭐ Score: <span id="score">0</span>
+</div>
+
 <div id="startScreen">
   <h1>🏀 Mathematics Game</h1>
-  <button onclick="startGame()">START</button>
+  <button onclick="startCountdown()">START</button>
 </div>
 
-<div id="gameScreen" class="hide">
-  <div id="hud">
-    ⏱ <span id="time">180</span>s　
-    ⭐ Score: <span id="score">0</span>
-    🔥 Combo: <span id="combo">0</span>
-  </div>
+<div id="countdownScreen" class="countdown hide">
+  <div class="bubble" id="countNum">3</div>
+</div>
 
-  <div id="ball">1 + 1 = ?</div>
+<div id="gameArea" class="hide">
+  <div id="ball">🟠<span id="question"></span></div>
 
   <div id="hoops">
-    <div class="hoop" onclick="choose(this)"></div>
-    <div class="hoop" onclick="choose(this)"></div>
-    <div class="hoop" onclick="choose(this)"></div>
+    <div class="hoop"><span></span></div>
+    <div class="hoop"><span></span></div>
+    <div class="hoop"><span></span></div>
   </div>
 </div>
+
+<div id="endScreen" class="hide">
+  <h1 id="finalText"></h1>
+  <h2>Your Score: <span id="finalScore"></span></h2>
+  <button onclick="location.href='index.html'">Back To Menu</button>
+</div>
+
+<audio id="good" src="correct.mp3"></audio>
+<audio id="bad" src="wrong.mp3"></audio>
+<audio id="end" src="congrats.mp3"></audio>
 
 <script src="math.js"></script>
 </body>
