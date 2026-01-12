@@ -5,7 +5,6 @@ body{
   font-family:'Comic Sans MS',cursive;
 }
 
-/* SCREENS */
 #startScreen,#endScreen{
   position:fixed;
   inset:0;
@@ -18,6 +17,7 @@ body{
 }
 
 h1{font-size:60px;color:#ff4d79}
+h2{font-size:80px;color:#ff4d79}
 
 button{
   font-size:34px;
@@ -29,7 +29,6 @@ button{
   box-shadow:0 8px #d94b70;
 }
 
-/* HUD */
 #hud{
   position:fixed;
   top:10px;
@@ -43,10 +42,8 @@ button{
 #scoreBox{font-size:26px}
 #question{font-size:32px;color:#ff4d79}
 
-/* GAME */
 #gameArea{position:absolute;inset:0}
 
-/* BALLOONS */
 .balloon{
   position:absolute;
   bottom:-150px;
