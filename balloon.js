@@ -1,54 +1,50 @@
-let time=180, score=0, life=3, timer;
-const colors=["red","blue","green","yellow","pink"];
-let target="red";
+const gameArea = document.getElementById("gameArea");
+const startScreen = document.getElementById("startScreen");
+const endScreen = document.getElementById("endScreen");
+const hud = document.getElementById("hud");
 
-const timeSpan=document.getElementById("time");
-const scoreSpan=document.getElementById("score");
-const lifeDiv=document.getElementById("life");
-const gameArea=document.getElementById("gameArea");
+const scoreBox = document.getElementById("score");
+const timeBox = document.getElementById("time");
+const lifeBox = document.getElementById("life");
+
+let score = 0;
+let time = 180;
+let life = 3;
+let timer;
 
 function startGame(){
   startScreen.classList.add("hide");
   hud.classList.remove("hide");
-  gameArea.classList.remove("hide");
-
-  timer=setInterval(()=>{
+  spawnBalloon();
+  timer = setInterval(()=>{
     time--;
-    timeSpan.innerText=time;
+    timeBox.innerText = time;
     if(time<=0) endGame();
   },1000);
-
-  spawn();
 }
 
-function spawn(){
-  if(time<=0 || life<=0) return;
-  createBalloon();
-  setTimeout(spawn,900);
-}
-
-function createBalloon(){
-  const c=colors[Math.floor(Math.random()*colors.length)];
+function spawnBalloon(){
+  const colors=["red","blue","green","yellow","pink"];
   const b=document.createElement("div");
-  b.className="balloon "+c;
-  b.style.left=Math.random()*85+"%";
-  gameArea.appendChild(b);
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  b.className="balloon "+color;
+  b.style.left=Math.random()*90+"%";
 
   b.onclick=()=>{
-    if(c===target){
-      document.getElementById("pop").play();
+    if(color=="red"){
       score+=10;
-      scoreSpan.innerText=score;
+      scoreBox.innerText=score;
     }else{
-      document.getElementById("wrong").play();
       life--;
-      lifeDiv.innerText="❤️".repeat(life);
-      if(life<=0) endGame();
+      lifeBox.innerText="❤️".repeat(life);
+      if(life<=0){ endGame(); return; }
     }
     b.remove();
   };
 
-  setTimeout(()=>b.remove(),10000);
+  gameArea.appendChild(b);
+  setTimeout(()=>b.remove(),9000);
+  if(time>0) setTimeout(spawnBalloon,700);
 }
 
 function endGame(){
@@ -56,7 +52,7 @@ function endGame(){
   gameArea.innerHTML="";
   hud.classList.add("hide");
   endScreen.classList.remove("hide");
-  document.getElementById("resultText").innerText=
+  document.getElementById("resultText").innerText =
     score>=200?"Excellent! 🎉":
     score>=100?"Good Job 😊":
     score>0?"Nice 🙂":"Try Again 😿";
