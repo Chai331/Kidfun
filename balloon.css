@@ -1,22 +1,26 @@
 body{
   margin:0;
-  background:linear-gradient(#bdeaff,#ffffff);
+  background:linear-gradient(#ccefff,#ffffff);
   overflow:hidden;
   font-family:'Comic Sans MS',cursive;
 }
 
+/* SCREENS */
 #startScreen,#endScreen{
-  position:absolute;
+  position:fixed;
   inset:0;
+  background:#ccefff;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  z-index:10;
 }
 
-#startScreen h1{font-size:60px;color:#ff4d79}
+h1{font-size:60px;color:#ff4d79}
+
 button{
-  font-size:36px;
+  font-size:34px;
   padding:18px 60px;
   border:none;
   border-radius:40px;
@@ -25,42 +29,35 @@ button{
   box-shadow:0 8px #d94b70;
 }
 
+/* HUD */
 #hud{
   position:fixed;
   top:10px;
   width:100%;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  font-size:22px;
+  text-align:center;
+  z-index:5;
 }
 
-#question{
-  font-size:28px;
-  color:#ff4d79;
-}
+#life{position:absolute;left:20px;font-size:30px}
+#timeBox{position:absolute;right:20px;font-size:26px}
+#scoreBox{font-size:26px}
+#question{font-size:32px;color:#ff4d79}
 
-#gameArea{
-  position:absolute;
-  inset:0;
-}
+/* GAME */
+#gameArea{position:absolute;inset:0}
 
+/* BALLOONS */
 .balloon{
   position:absolute;
   bottom:-150px;
-  width:110px;
-  height:150px;
+  width:100px;
+  height:140px;
   border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  animation:float 9s linear forwards;
   cursor:pointer;
-  animation:float 10s linear forwards;
 }
 
-@keyframes float{
-  to{transform:translateY(-120vh)}
-}
+@keyframes float{to{transform:translateY(-130vh)}}
 
 .red{background:#ff4d4d}
 .blue{background:#4da6ff}
