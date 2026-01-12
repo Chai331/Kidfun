@@ -2,32 +2,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Pop The Balloon</title>
+<title>Pop The Red Balloon</title>
 <link rel="stylesheet" href="balloon.css">
 </head>
 <body>
 
+<!-- START SCREEN -->
 <div id="startScreen">
-  <h1>🎈 POP THE BALLOON 🎈</h1>
+  <h1>🎈 POP THE RED BALLOON 🎈</h1>
   <button onclick="startGame()">START</button>
 </div>
 
+<!-- HUD -->
 <div id="hud" class="hide">
-  <div id="question">POP THE RED BALLOON</div>
   <div id="life">❤️❤️❤️</div>
-  <div>⏰ <span id="time">180</span>s</div>
-  <div>⭐ <span id="score">0</span></div>
+  <div id="timeBox">⏰ <span id="time">180</span>s</div>
+  <div id="scoreBox">SCORE: <span id="score">0</span></div>
+  <div id="question">POP THE RED BALLOON</div>
 </div>
 
-<div id="gameArea" class="hide"></div>
+<!-- GAME AREA -->
+<div id="gameArea"></div>
 
+<!-- END SCREEN -->
 <div id="endScreen" class="hide">
   <h1 id="resultText"></h1>
   <button onclick="location.href='index.html'">BACK TO MENU</button>
 </div>
-
-<audio id="pop" src="pop.mp3"></audio>
-<audio id="wrong" src="wrong.mp3"></audio>
 
 <script src="balloon.js"></script>
 </body>
