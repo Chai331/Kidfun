@@ -6,6 +6,7 @@ const hud = document.getElementById("hud");
 const scoreBox = document.getElementById("score");
 const timeBox = document.getElementById("time");
 const lifeBox = document.getElementById("life");
+const finalScore = document.getElementById("finalScore");
 
 let score = 0;
 let time = 180;
@@ -52,8 +53,5 @@ function endGame(){
   gameArea.innerHTML="";
   hud.classList.add("hide");
   endScreen.classList.remove("hide");
-  document.getElementById("resultText").innerText =
-    score>=200?"Excellent! 🎉":
-    score>=100?"Good Job 😊":
-    score>0?"Nice 🙂":"Try Again 😿";
+  finalScore.innerText = score;
 }
