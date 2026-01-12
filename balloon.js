@@ -1,7 +1,10 @@
-let time=180, score=0, combo=0, timer;
+let time=180, score=0, life=3, timer;
+const colors=["red","blue","green","yellow","pink"];
+let target="red";
 
 const timeSpan=document.getElementById("time");
 const scoreSpan=document.getElementById("score");
+const lifeDiv=document.getElementById("life");
 const gameArea=document.getElementById("gameArea");
 
 function startGame(){
@@ -15,36 +18,37 @@ function startGame(){
     if(time<=0) endGame();
   },1000);
 
-  spawnBalloon();
+  spawn();
 }
 
-function spawnBalloon(){
-  if(time<=0) return;
-
+function spawn(){
+  if(time<=0 || life<=0) return;
   createBalloon();
-  setTimeout(spawnBalloon,1800);
+  setTimeout(spawn,900);
 }
 
 function createBalloon(){
-  let number=Math.floor(Math.random()*20)+1;
-
+  const c=colors[Math.floor(Math.random()*colors.length)];
   const b=document.createElement("div");
-  b.className="balloon";
-  b.innerText=number;
+  b.className="balloon "+c;
   b.style.left=Math.random()*85+"%";
   gameArea.appendChild(b);
 
   b.onclick=()=>{
-    document.getElementById("pop").play();
-    combo++;
-
-    let bonus=combo>=4?(combo-3)*10:0;
-    score+=10+bonus;
-    scoreSpan.innerText=score;
+    if(c===target){
+      document.getElementById("pop").play();
+      score+=10;
+      scoreSpan.innerText=score;
+    }else{
+      document.getElementById("wrong").play();
+      life--;
+      lifeDiv.innerText="❤️".repeat(life);
+      if(life<=0) endGame();
+    }
     b.remove();
   };
 
-  setTimeout(()=>b.remove(),12000);
+  setTimeout(()=>b.remove(),10000);
 }
 
 function endGame(){
@@ -52,9 +56,8 @@ function endGame(){
   gameArea.innerHTML="";
   hud.classList.add("hide");
   endScreen.classList.remove("hide");
-
   document.getElementById("resultText").innerText=
-    score>=300?"Excellent! 🎉":
-    score>=150?"Good! 😊":
-    score>0?"Nice! 🙂":"Try Again! 😿";
+    score>=200?"Excellent! 🎉":
+    score>=100?"Good Job 😊":
+    score>0?"Nice 🙂":"Try Again 😿";
 }
