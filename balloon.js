@@ -1,82 +1,53 @@
-const startScreen = document.getElementById("startScreen");
-const endScreen = document.getElementById("endScreen");
-const hud = document.getElementById("hud");
-const gameArea = document.getElementById("gameArea");
+let score=0;
+let hearts=3;
+let time=180;
+let gameTimer, spawnTimer;
 
-const scoreText = document.getElementById("score");
-const timeText = document.getElementById("time");
-const lifeText = document.getElementById("life");
-const finalScore = document.getElementById("finalScore");
-const startBtn = document.getElementById("startBtn");
-
-let score = 0;
-let time = 180;
-let life = 3;
-let timer;
-let gameRunning = false;
-
-startBtn.onclick = startGame;
+const colors=["red","blue","yellow","green","purple"];
 
 function startGame(){
-  score = 0;
-  time = 180;
-  life = 3;
-  gameRunning = true;
+document.getElementById("startScreen").style.display="none";
+document.getElementById("hud").style.display="flex";
+document.getElementById("question").style.display="block";
 
-  scoreText.innerText = score;
-  timeText.innerText = time;
-  lifeText.innerText = "❤️❤️❤️";
+gameTimer=setInterval(()=>{
+time--;
+document.getElementById("timer").innerText="⏰ "+time;
+if(time<=0) endGame();
+},1000);
 
-  startScreen.classList.add("hide");
-  endScreen.classList.add("hide");
-  hud.classList.remove("hide");
-
-  timer = setInterval(()=>{
-    time--;
-    timeText.innerText = time;
-    if(time <= 0) endGame();
-  },1000);
-
-  spawnBalloon();
+spawnTimer=setInterval(spawnBalloon,800);
 }
 
 function spawnBalloon(){
-  if(!gameRunning) return;
+let b=document.createElement("div");
+let color=colors[Math.floor(Math.random()*colors.length)];
+b.className="balloon";
+b.style.background=color;
+b.style.left=Math.random()*90+"%";
 
-  const colors = ["red","blue","green","yellow","pink"];
-  const balloon = document.createElement("div");
-  const color = colors[Math.floor(Math.random()*colors.length)];
+b.onclick=()=>{
+if(color==="red"){
+score+=10;
+document.getElementById("score").innerText=score;
+}else{
+hearts--;
+document.getElementById("hearts").innerText="❤️".repeat(hearts);
+if(hearts<=0) endGame();
+}
+b.remove();
+};
 
-  balloon.className = "balloon " + color;
-  balloon.style.left = Math.random()*90 + "%";
-
-  balloon.onclick = ()=>{
-    if(color === "red"){
-      score += 10;
-      scoreText.innerText = score;
-    }else{
-      life--;
-      lifeText.innerText = "❤️".repeat(life);
-      if(life <= 0){
-        endGame();
-        return;
-      }
-    }
-    balloon.remove();
-  };
-
-  gameArea.appendChild(balloon);
-
-  setTimeout(()=>balloon.remove(),8000);
-  setTimeout(spawnBalloon,700);
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),7000);
 }
 
 function endGame(){
-  gameRunning = false;
-  clearInterval(timer);
-  gameArea.innerHTML = "";
-
-  hud.classList.add("hide");
-  endScreen.classList.remove("hide");
-  finalScore.innerText = score;
+clearInterval(gameTimer);
+clearInterval(spawnTimer);
+document.querySelectorAll(".balloon").forEach(b=>b.remove());
+document.getElementById("hud").style.display="none";
+document.getElementById("question").style.display="none";
+document.getElementById("endScreen").style.display="block";
+document.getElementById("finalScore").innerText=score;
 }
