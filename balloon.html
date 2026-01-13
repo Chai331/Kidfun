@@ -2,32 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Pop The Red Balloon</title>
+<title>Balloon Game</title>
 <link rel="stylesheet" href="balloon.css">
 </head>
-
 <body>
 
-<!-- HUD -->
-<div id="hud">
+<div id="topBar">
   <div id="hearts">❤️❤️❤️</div>
-  <div id="scoreBox">Score: <span id="score">0</span></div>
-  <div id="timer">⏰ 180</div>
+  <div id="score">Score: 0</div>
+  <div id="time">180</div>
 </div>
 
-<div id="question">POP THE RED BALLOON</div>
+<div id="question"></div>
 
-<!-- START -->
+<div id="gameArea"></div>
+
 <div id="startScreen">
-  <h1>POP THE BALLOON 🎈</h1>
   <button onclick="startGame()">START</button>
 </div>
 
-<!-- END -->
 <div id="endScreen">
-  <h1>YOUR SCORE</h1>
-  <div id="finalScore">0</div>
-  <button onclick="location.href='index.html'">MAIN MENU</button>
+  <h1>Game Over</h1>
+  <h2 id="finalScore"></h2>
+  <button onclick="location.href='index.html'">Main Menu</button>
 </div>
 
 <script src="balloon.js"></script>
