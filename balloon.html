@@ -5,29 +5,24 @@
 <title>Pop The Red Balloon</title>
 <link rel="stylesheet" href="balloon.css">
 </head>
+
 <body>
 
-<!-- START SCREEN -->
-<div id="startScreen">
-  <h1>🎈 POP THE RED BALLOON 🎈</h1>
+<div id="hud">
+  <div id="hearts">❤️❤️❤️</div>
+  <div id="scoreBox">Score: <span id="score">0</span></div>
+  <div id="timer">⏰ 180</div>
+</div>
+
+<div id="question">POP THE RED BALLOON</div>
+
+<div id="center">
   <button id="startBtn">START</button>
 </div>
 
-<!-- GAME HUD -->
-<div id="hud" class="hide">
-  <div id="life">❤️❤️❤️</div>
-  <div id="scoreBox">SCORE: <span id="score">0</span></div>
-  <div id="timeBox">⏰ <span id="time">180</span>s</div>
-  <div id="question">POP THE RED BALLOON</div>
-</div>
-
-<!-- GAME AREA -->
-<div id="gameArea"></div>
-
-<!-- END SCREEN -->
-<div id="endScreen" class="hide">
+<div id="end">
   <h1>YOUR SCORE</h1>
-  <h2 id="finalScore">0</h2>
+  <div id="finalScore">0</div>
   <button onclick="location.href='index.html'">MAIN MENU</button>
 </div>
 
