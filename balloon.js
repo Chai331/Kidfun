@@ -42,3 +42,4 @@ function endGame(){
   document.getElementById("endScreen").style.display="flex";
   document.getElementById("finalScore").innerText="Your Score: "+score;
 }
+ 
