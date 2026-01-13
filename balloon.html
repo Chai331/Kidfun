@@ -7,20 +7,24 @@
 </head>
 <body>
 
+<!-- START SCREEN -->
 <div id="startScreen">
   <h1>🎈 POP THE RED BALLOON 🎈</h1>
-  <button onclick="startGame()">START</button>
+  <button id="startBtn">START</button>
 </div>
 
+<!-- GAME HUD -->
 <div id="hud" class="hide">
   <div id="life">❤️❤️❤️</div>
-  <div id="timeBox">⏰ <span id="time">180</span>s</div>
   <div id="scoreBox">SCORE: <span id="score">0</span></div>
+  <div id="timeBox">⏰ <span id="time">180</span>s</div>
   <div id="question">POP THE RED BALLOON</div>
 </div>
 
+<!-- GAME AREA -->
 <div id="gameArea"></div>
 
+<!-- END SCREEN -->
 <div id="endScreen" class="hide">
   <h1>YOUR SCORE</h1>
   <h2 id="finalScore">0</h2>
