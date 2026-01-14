@@ -1,19 +1,8 @@
 body{
   margin:0;
-  background:linear-gradient(#b9f3ff,#ffffff);
+  background:url("2.jpg") no-repeat center/cover;
   overflow:hidden;
   font-family:'Comic Sans MS', cursive;
-}
-
-/* Cute cloud background */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("https://i.imgur.com/8QZ7G6F.png");
-  background-size:300px;
-  opacity:.25;
-  pointer-events:none;
 }
 
 #topBar{
@@ -29,10 +18,10 @@ body::before{
 }
 
 #question{
-  margin-top:90px;
+  margin-top:80px;
   text-align:center;
-  font-size:38px;
-  color:#ff6fa1;
+  font-size:40px;
+  color:#ff5b7f;
   text-shadow:2px 2px white;
 }
 
@@ -43,26 +32,43 @@ body::before{
   height:80%;
 }
 
-/* 🎈 Balloon Style */
 .balloon{
   position:absolute;
   bottom:-120px;
-  font-size:80px;
+  width:70px;
+  height:90px;
+  border-radius:50% 50% 50% 50%;
   animation:fly 7s linear forwards;
   cursor:pointer;
-  filter:drop-shadow(3px 5px rgba(0,0,0,.15));
 }
+
+.balloon::after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:30px;
+  background:#555;
+  bottom:-30px;
+  left:50%;
+}
+
+.red{background:#ff4d6d;}
+.blue{background:#4dabff;}
+.yellow{background:#ffe066;}
+.green{background:#6bff8e;}
+.purple{background:#c77dff;}
+.pink{background:#ff8fab;}
+.orange{background:#ff9f1c;}
 
 @keyframes fly{
   from{bottom:-120px;}
   to{bottom:115%;}
 }
 
-/* Screens */
 #startScreen,#endScreen{
   position:fixed;
   inset:0;
-  background:linear-gradient(#ffe8f0,#fff);
+  background:rgba(255,255,255,.9);
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -70,37 +76,24 @@ body::before{
 }
 
 #startScreen button{
-  padding:30px 90px;
+  padding:35px 100px;
   font-size:50px;
   border-radius:40px;
   border:none;
   background:#ff77a8;
   color:white;
   box-shadow:0 10px #ff4f8b;
-  cursor:pointer;
-}
-
-#startScreen button:active{
-  transform:translateY(6px);
-  box-shadow:0 4px #ff4f8b;
 }
 
 #endScreen{
   display:none;
-  color:#ff6fa1;
-  text-align:center;
+  color:#ff5b7f;
 }
-
-#endScreen h1{
-  font-size:60px;
-}
-
+#endScreen h1{font-size:60px;}
 #endScreen button{
-  margin-top:25px;
   padding:20px 60px;
   font-size:36px;
   border-radius:30px;
   border:none;
   background:#ffc83d;
-  cursor:pointer;
 }
