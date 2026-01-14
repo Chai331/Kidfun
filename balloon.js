@@ -1,62 +1,44 @@
-let score=0, hearts=3, time=180, playing=false;
-const colors=["red","blue","yellow","green","pink"];
+let score=0, lives=3, time=180;
+const colors=["red","blue","yellow","green"];
 
 function startGame(){
   document.getElementById("startScreen").style.display="none";
-  playing=true;
-  spawnLoop();
-  timerLoop();
-}
-
-function spawnLoop(){
-  if(!playing) return;
-  createBalloon();
-  setTimeout(spawnLoop,700);
-}
-
-function createBalloon(){
-  let b=document.createElement("div");
-  let c=colors[Math.floor(Math.random()*colors.length)];
-  b.className="balloon "+c;
-  b.style.left=Math.random()*90+"%";
-  b.onclick=()=>hit(c,b);
-  gameArea.appendChild(b);
-  setTimeout(()=>b.remove(),8000);
-}
-
-function hit(color,b){
-  b.remove();
-  if(color=="red"){
-    score+=10;
-  }else{
-    hearts--;
-  }
-  updateHUD();
-  if(hearts<=0) endGame();
-}
-
-function timerLoop(){
-  let t=setInterval(()=>{
-    if(!playing){clearInterval(t);return;}
+  document.getElementById("question").innerText="POP THE RED BALLOON";
+  spawnLoop=setInterval(spawnBalloon,800);
+  timer=setInterval(()=>{
     time--;
-    updateHUD();
-    if(time<=0) endGame();
+    document.getElementById("time").innerText=time;
+    if(time<=0||lives<=0) endGame();
   },1000);
 }
 
-function updateHUD(){
-  scoreDiv.innerText="Score: "+score;
-  heartsDiv.innerText="❤️".repeat(hearts);
-  timeDiv.innerText=time;
+function spawnBalloon(){
+  let color=colors[Math.floor(Math.random()*colors.length)];
+  let b=document.createElement("div");
+  b.className="balloon";
+  b.innerText="🎈";
+  b.style.left=Math.random()*90+"%";
+  b.style.color=color;
+
+  b.onclick=()=>{
+    if(color=="red"){
+      score+=10;
+      document.getElementById("score").innerText="Score: "+score;
+    }else{
+      lives--;
+      document.getElementById("hearts").innerText="❤️".repeat(lives);
+      if(lives<=0) endGame();
+    }
+    b.remove();
+  };
+
+  document.getElementById("gameArea").appendChild(b);
+  setTimeout(()=>b.remove(),6000);
 }
 
 function endGame(){
-  playing=false;
-  gameArea.innerHTML="";
-  gameOver.classList.remove("hide");
-  finalScore.innerText="Your Score: "+score;
+  clearInterval(spawnLoop);
+  clearInterval(timer);
+  document.getElementById("endScreen").style.display="flex";
+  document.getElementById("finalScore").innerText="Your Score: "+score;
 }
-
-const scoreDiv=document.getElementById("score");
-const heartsDiv=document.getElementById("hearts");
-const timeDiv=document.getElementById("time");
