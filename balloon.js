@@ -3,12 +3,26 @@ let spawnLoop,timer;
 
 const colors=["red","blue","yellow","green","purple","orange"];
 
+const popSound=document.getElementById("popSound");
+const wrongSound=document.getElementById("wrongSound");
+
+function playPop(){
+  popSound.currentTime=0;
+  popSound.play();
+}
+function playWrong(){
+  wrongSound.currentTime=0;
+  wrongSound.play();
+}
+
 function startGame(){
+  playPop();
   document.getElementById("startScreen").style.display="none";
   document.getElementById("colorGuide").style.display="flex";
 }
 
 function closeGuide(){
+  playPop();
   document.getElementById("colorGuide").style.display="none";
   score=0; lives=3; time=180;
   updateUI();
@@ -34,8 +48,13 @@ function spawnBalloon(){
   b.style.left=Math.random()*90+"%";
 
   b.onclick=()=>{
-    if(color==="red") score+=10;
-    else lives--;
+    if(color==="red"){
+      score+=10;
+      playPop();       // correct balloon
+    }else{
+      lives--;
+      playWrong();     // wrong balloon
+    }
     updateUI();
     b.remove();
     if(lives<=0) endGame();
