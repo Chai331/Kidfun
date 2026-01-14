@@ -10,12 +10,19 @@ body{
 #topBar{
   position:fixed;
   top:10px;
+  left:0;
   width:100%;
-  display:flex;
-  justify-content:space-between;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items:center;
   padding:0 20px;
   font-size:28px;
+  box-sizing:border-box;
 }
+
+#hearts{justify-self:start;}
+#score{justify-self:center;}
+#time{justify-self:end;}
 
 #question{
   margin-top:70px;
