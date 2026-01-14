@@ -6,7 +6,7 @@ body{
   font-family:Comic Sans MS;
 }
 
-/* TOP BAR */
+/* Top bar */
 #topBar{
   position:fixed;
   top:10px;
@@ -23,7 +23,7 @@ body{
   font-size:36px;
 }
 
-/* GAME AREA */
+/* Game area */
 #gameArea{
   position:fixed;
   bottom:0;
@@ -31,38 +31,54 @@ body{
   height:80%;
 }
 
-/* BALLOONS */
+/* REAL BALLOONS */
 .balloon{
   position:absolute;
-  bottom:-140px;
-  font-size:78px;
+  bottom:-150px;
+  width:90px;
+  height:110px;
+  border-radius:50% 50% 45% 45%;
   cursor:pointer;
   animation:fly 7s linear forwards;
-  filter:drop-shadow(0 8px 6px rgba(0,0,0,.15));
-  transition:.2s;
+  box-shadow: inset -8px -12px rgba(0,0,0,0.15);
 }
 
-.balloon:hover{
-  transform:scale(1.15);
+/* String */
+.balloon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-35px;
+  width:2px;
+  height:35px;
+  background:#555;
 }
+
+/* Balloon colors */
+.balloon.red{background:#ff3b3b;}
+.balloon.blue{background:#3fa9ff;}
+.balloon.yellow{background:#ffd93d;}
+.balloon.green{background:#4cd964;}
+.balloon.purple{background:#b14cff;}
+.balloon.orange{background:#ff8c1a;}
 
 @keyframes fly{
-  from{ bottom:-140px; }
-  to{ bottom:120%; }
+  from{bottom:-150px;}
+  to{bottom:110%;}
 }
 
-/* SCREENS */
+/* Screens */
 #startScreen,#endScreen,#colorGuide{
   position:fixed;
   inset:0;
   background:rgba(255,255,255,.95);
   display:flex;
+  flex-direction:column;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
 }
 
-/* START BUTTON */
+/* Start button */
 #startScreen button{
   padding:28px 90px;
   font-size:44px;
@@ -73,11 +89,11 @@ body{
   box-shadow:0 10px #ff2f75;
 }
 
-/* END SCREEN */
-#endScreen{ display:none; }
+/* End screen */
+#endScreen{display:none}
 
-/* COLOR GUIDE */
-#colorGuide{ display:none; }
+/* Guide */
+#colorGuide{display:none}
 
 .guideBox{
   background:white;
