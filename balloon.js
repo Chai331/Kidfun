@@ -1,9 +1,9 @@
 let score=0, lives=3, time=180;
-const colors=["red","blue","yellow","green"];
+const colors=["red","blue","yellow","green","purple","pink","orange"];
+let spawnLoop,timer;
 
 function startGame(){
   document.getElementById("startScreen").style.display="none";
-  document.getElementById("question").innerText="POP THE RED BALLOON";
   spawnLoop=setInterval(spawnBalloon,800);
   timer=setInterval(()=>{
     time--;
@@ -15,10 +15,8 @@ function startGame(){
 function spawnBalloon(){
   let color=colors[Math.floor(Math.random()*colors.length)];
   let b=document.createElement("div");
-  b.className="balloon";
-  b.innerText="🎈";
+  b.className="balloon "+color;
   b.style.left=Math.random()*90+"%";
-  b.style.color=color;
 
   b.onclick=()=>{
     if(color=="red"){
@@ -33,7 +31,7 @@ function spawnBalloon(){
   };
 
   document.getElementById("gameArea").appendChild(b);
-  setTimeout(()=>b.remove(),6000);
+  setTimeout(()=>b.remove(),7000);
 }
 
 function endGame(){
