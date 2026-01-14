@@ -1,9 +1,13 @@
-let score=0, lives=3, time=180;
-const colors=["red","blue","yellow","green","purple","pink","orange"];
+let score=0,lives=3,time=180;
 let spawnLoop,timer;
+
+const colors=["red","blue","yellow","green","purple","orange"];
 
 function startGame(){
   document.getElementById("startScreen").style.display="none";
+  score=0; lives=3; time=180;
+  updateUI();
+
   spawnLoop=setInterval(spawnBalloon,800);
   timer=setInterval(()=>{
     time--;
@@ -12,31 +16,38 @@ function startGame(){
   },1000);
 }
 
+function updateUI(){
+  document.getElementById("score").innerText="Score: "+score;
+  document.getElementById("hearts").innerText="❤️".repeat(lives);
+  document.getElementById("time").innerText=time;
+}
+
 function spawnBalloon(){
-  let color=colors[Math.floor(Math.random()*colors.length)];
-  let b=document.createElement("div");
-  b.className="balloon "+color;
+  const color=colors[Math.floor(Math.random()*colors.length)];
+  const b=document.createElement("div");
+  b.className="balloon";
+  b.innerText="🎈";
   b.style.left=Math.random()*90+"%";
+  b.style.color=color;
 
   b.onclick=()=>{
-    if(color=="red"){
+    if(color==="red"){
       score+=10;
-      document.getElementById("score").innerText="Score: "+score;
     }else{
       lives--;
-      document.getElementById("hearts").innerText="❤️".repeat(lives);
-      if(lives<=0) endGame();
     }
+    updateUI();
     b.remove();
+    if(lives<=0) endGame();
   };
 
   document.getElementById("gameArea").appendChild(b);
-  setTimeout(()=>b.remove(),7000);
+  setTimeout(()=>b.remove(),6000);
 }
 
 function endGame(){
   clearInterval(spawnLoop);
   clearInterval(timer);
-  document.getElementById("endScreen").style.display="flex";
   document.getElementById("finalScore").innerText="Your Score: "+score;
+  document.getElementById("endScreen").style.display="flex";
 }
