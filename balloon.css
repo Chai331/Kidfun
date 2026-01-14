@@ -6,6 +6,7 @@ body{
   font-family:Comic Sans MS;
 }
 
+/* TOP BAR */
 #topBar{
   position:fixed;
   top:10px;
@@ -22,6 +23,7 @@ body{
   font-size:36px;
 }
 
+/* GAME AREA */
 #gameArea{
   position:fixed;
   bottom:0;
@@ -29,31 +31,38 @@ body{
   height:80%;
 }
 
-/* balloons */
+/* BALLOONS */
 .balloon{
   position:absolute;
-  bottom:-120px;
+  bottom:-140px;
   font-size:78px;
   cursor:pointer;
-  animation:fly 6s linear forwards;
+  animation:fly 7s linear forwards;
   filter:drop-shadow(0 8px 6px rgba(0,0,0,.15));
+  transition:.2s;
+}
+
+.balloon:hover{
+  transform:scale(1.15);
 }
 
 @keyframes fly{
-  from{bottom:-120px;}
-  to{bottom:110%;}
+  from{ bottom:-140px; }
+  to{ bottom:120%; }
 }
 
+/* SCREENS */
 #startScreen,#endScreen,#colorGuide{
   position:fixed;
   inset:0;
   background:rgba(255,255,255,.95);
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
 }
 
+/* START BUTTON */
 #startScreen button{
   padding:28px 90px;
   font-size:44px;
@@ -64,8 +73,11 @@ body{
   box-shadow:0 10px #ff2f75;
 }
 
-#endScreen{display:none}
-#colorGuide{display:none}
+/* END SCREEN */
+#endScreen{ display:none; }
+
+/* COLOR GUIDE */
+#colorGuide{ display:none; }
 
 .guideBox{
   background:white;
@@ -77,14 +89,7 @@ body{
 }
 
 .guideTitle{font-size:42px;margin-bottom:15px;}
-.guideRow{margin:12px 0;font-size:30px;}
-
-.redText{color:red;}
-.blueText{color:#3fa9ff;}
-.yellowText{color:#ffd93d;}
-.greenText{color:#4cd964;}
-.purpleText{color:#b14cff;}
-.orangeText{color:#ff8c1a;}
+.guideRow{margin:10px 0;}
 
 .closeGuide{
   margin-top:25px;
