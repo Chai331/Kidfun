@@ -30,10 +30,8 @@ function updateUI(){
 function spawnBalloon(){
   const color=colors[Math.floor(Math.random()*colors.length)];
   const b=document.createElement("div");
-  b.className="balloon";
-  b.innerHTML="🎈";
+  b.className="balloon "+color;
   b.style.left=Math.random()*90+"%";
-  b.style.color=color;
 
   b.onclick=()=>{
     if(color==="red") score+=10;
