@@ -6,7 +6,6 @@ body{
   font-family:Comic Sans MS;
 }
 
-/* Top bar */
 #topBar{
   position:fixed;
   top:10px;
@@ -23,7 +22,6 @@ body{
   font-size:36px;
 }
 
-/* Game area */
 #gameArea{
   position:fixed;
   bottom:0;
@@ -31,7 +29,6 @@ body{
   height:80%;
 }
 
-/* Balloons */
 .balloon{
   position:absolute;
   bottom:-120px;
@@ -46,7 +43,6 @@ body{
   to{bottom:110%;}
 }
 
-/* Screens */
 #startScreen,#endScreen,#colorGuide{
   position:fixed;
   inset:0;
@@ -57,7 +53,6 @@ body{
   align-items:center;
 }
 
-/* Start button */
 #startScreen button{
   padding:28px 90px;
   font-size:44px;
@@ -68,10 +63,7 @@ body{
   box-shadow:0 10px #ff2f75;
 }
 
-/* End screen */
 #endScreen{display:none}
-
-/* Guide */
 #colorGuide{display:none}
 
 .guideBox{
@@ -88,15 +80,16 @@ body{
 .guideRow{
   margin:10px 0;
   font-size:30px;
+  font-weight:bold;
 }
 
-/* REAL colored balloon icons */
-.red::before{content:"🎈 ";color:red;}
-.blue::before{content:"🎈 ";color:#3fa9ff;}
-.yellow::before{content:"🎈 ";color:#ffd93d;}
-.green::before{content:"🎈 ";color:#4cd964;}
-.purple::before{content:"🎈 ";color:#b14cff;}
-.orange::before{content:"🎈 ";color:#ff8c1a;}
+/* FULL COLOR WORDS */
+.red{color:red;}
+.blue{color:#3fa9ff;}
+.yellow{color:#ffd93d;}
+.green{color:#2ecc71;}
+.purple{color:#b14cff;}
+.orange{color:#ff8c1a;}
 
 .closeGuide{
   margin-top:25px;
