@@ -89,12 +89,10 @@ body{
   box-shadow:0 10px #ff2f75;
 }
 
-/* End screen */
 #endScreen{display:none}
-
-/* Guide */
 #colorGuide{display:none}
 
+/* Guide box */
 .guideBox{
   background:white;
   border-radius:30px;
