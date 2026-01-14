@@ -13,7 +13,7 @@ function closeGuide(){
   score=0; lives=3; time=180;
   updateUI();
 
-  spawnLoop=setInterval(spawnBalloon,800);
+  spawnLoop=setInterval(spawnBalloon,900);
   timer=setInterval(()=>{
     time--;
     document.getElementById("time").innerText=time;
@@ -31,7 +31,7 @@ function spawnBalloon(){
   const color=colors[Math.floor(Math.random()*colors.length)];
   const b=document.createElement("div");
   b.className="balloon";
-  b.innerText="🎈";
+  b.innerHTML="🎈";
   b.style.left=Math.random()*90+"%";
   b.style.color=color;
 
@@ -44,7 +44,7 @@ function spawnBalloon(){
   };
 
   document.getElementById("gameArea").appendChild(b);
-  setTimeout(()=>b.remove(),6000);
+  setTimeout(()=>b.remove(),7000);
 }
 
 function endGame(){
