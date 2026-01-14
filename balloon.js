@@ -31,7 +31,7 @@ function spawnBalloon(){
   const color=colors[Math.floor(Math.random()*colors.length)];
   const b=document.createElement("div");
   b.className="balloon";
-  b.innerHTML="&#x1F388;&#xFE0E;";
+  b.innerHTML="🎈";
   b.style.left=Math.random()*90+"%";
   b.style.color=color;
 
