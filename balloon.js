@@ -5,6 +5,11 @@ const colors=["red","blue","yellow","green","purple","orange"];
 
 function startGame(){
   document.getElementById("startScreen").style.display="none";
+  document.getElementById("colorGuide").style.display="flex";
+}
+
+function closeGuide(){
+  document.getElementById("colorGuide").style.display="none";
   score=0; lives=3; time=180;
   updateUI();
 
@@ -31,11 +36,8 @@ function spawnBalloon(){
   b.style.color=color;
 
   b.onclick=()=>{
-    if(color==="red"){
-      score+=10;
-    }else{
-      lives--;
-    }
+    if(color==="red") score+=10;
+    else lives--;
     updateUI();
     b.remove();
     if(lives<=0) endGame();
