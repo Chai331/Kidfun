@@ -6,7 +6,7 @@ body{
   font-family:Comic Sans MS;
 }
 
-/* top bar stays same */
+/* top bar */
 #topBar{
   position:fixed;
   top:10px;
@@ -17,7 +17,7 @@ body{
   font-size:28px;
 }
 
-/* question stays same */
+/* question */
 #question{
   margin-top:70px;
   text-align:center;
@@ -32,7 +32,7 @@ body{
   height:80%;
 }
 
-/* 🌈 CUTER BALLOONS */
+/* balloons */
 .balloon{
   position:absolute;
   bottom:-120px;
@@ -40,21 +40,15 @@ body{
   cursor:pointer;
   animation:fly 6s linear forwards;
   filter:drop-shadow(0 8px 6px rgba(0,0,0,.15));
-  transition:.15s;
 }
 
-.balloon:hover{
-  transform:scale(1.15);
-}
-
-/* same fly animation */
 @keyframes fly{
   from{bottom:-120px;}
   to{bottom:110%;}
 }
 
 /* screens */
-#startScreen,#endScreen{
+#startScreen,#endScreen,#colorGuide{
   position:fixed;
   inset:0;
   background:rgba(255,255,255,.95);
@@ -64,7 +58,7 @@ body{
   align-items:center;
 }
 
-/* 🌸 CUTER START BUTTON ONLY */
+/* start button */
 #startScreen button{
   padding:28px 90px;
   font-size:44px;
@@ -72,17 +66,33 @@ body{
   border:none;
   background:linear-gradient(#ff9acb,#ff4d88);
   color:white;
-  cursor:pointer;
   box-shadow:0 10px #ff2f75;
 }
 
-/* end screen button unchanged */
-#endScreen button{
-  padding:20px 60px;
-  font-size:36px;
-  border-radius:20px;
-  border:none;
-  background:#ffcc00;
+/* end screen */
+#endScreen{display:none}
+
+/* color guide */
+#colorGuide{display:none}
+
+.guideBox{
+  background:white;
+  border-radius:30px;
+  padding:40px 60px;
+  font-size:32px;
+  text-align:center;
+  box-shadow:0 14px 0 rgba(0,0,0,.25);
 }
 
-#endScreen{display:none;}
+.guideTitle{font-size:42px;margin-bottom:15px;}
+.guideRow{margin:8px 0;}
+
+.closeGuide{
+  margin-top:25px;
+  padding:18px 60px;
+  font-size:30px;
+  border:none;
+  border-radius:20px;
+  background:#ff9acb;
+  color:white;
+}
