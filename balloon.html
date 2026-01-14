@@ -36,8 +36,11 @@
 <div id="endScreen">
   <h1>Game Over</h1>
   <h2 id="finalScore"></h2>
-  <button onclick="location.href='index.html'">Main Menu</button>
+  <button onclick="playPop(); location.href='index.html'">Main Menu</button>
 </div>
+
+<audio id="popSound" src="pop.mp3"></audio>
+<audio id="wrongSound" src="wrong.mp3"></audio>
 
 <script src="balloon.js"></script>
 </body>
