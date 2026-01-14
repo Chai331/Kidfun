@@ -31,9 +31,11 @@ function spawnBalloon(){
   const color=colors[Math.floor(Math.random()*colors.length)];
   const b=document.createElement("div");
   b.className="balloon";
-  b.innerText="🎈";
   b.style.left=Math.random()*90+"%";
-  b.style.color=color;
+  b.style.setProperty("--c", color);
+
+  // REAL BALLOON
+  b.innerHTML = '<div class="balloonBody"></div><div class="balloonString"></div>';
 
   b.onclick=()=>{
     if(color==="red") score+=10;
