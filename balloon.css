@@ -163,3 +163,14 @@ body{
 #endScreen button:hover{
   transform:scale(1.1);
 }
+
+/* =========================
+   START SCREEN BACKGROUND
+========================= */
+
+#startScreen{
+  background:
+    radial-gradient(circle at top left, #ffd1e8, transparent 40%),
+    radial-gradient(circle at bottom right, #c1f0ff, transparent 45%),
+    linear-gradient(#fff6a3, #ffd1e8);
+}
