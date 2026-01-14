@@ -6,6 +6,7 @@ body{
   font-family:Comic Sans MS;
 }
 
+/* Top bar */
 #topBar{
   position:fixed;
   top:10px;
@@ -14,35 +15,59 @@ body{
   justify-content:space-between;
   padding:0 20px;
   font-size:28px;
+  z-index:20;
 }
 
 #question{
   margin-top:70px;
   text-align:center;
   font-size:36px;
+  color:#ff3b7a;
+  text-shadow:2px 2px white;
+  z-index:20;
+  position:relative;
 }
 
+/* Game area */
 #gameArea{
   position:fixed;
   bottom:0;
   width:100%;
   height:80%;
+  overflow:hidden;
 }
 
+/* REAL BALLOONS */
 .balloon{
+  width:70px;
   position:absolute;
   bottom:-120px;
-  font-size:78px;
-  cursor:pointer;
   animation:fly 6s linear forwards;
-  filter:drop-shadow(0 8px 6px rgba(0,0,0,.15));
+  cursor:pointer;
 }
 
+.balloonBody{
+  width:70px;
+  height:90px;
+  background:var(--c);
+  border-radius:50%;
+  box-shadow: inset -8px -8px rgba(255,255,255,.25);
+}
+
+.balloonString{
+  width:2px;
+  height:30px;
+  background:#555;
+  margin:auto;
+}
+
+/* Fly animation */
 @keyframes fly{
   from{bottom:-120px;}
   to{bottom:110%;}
 }
 
+/* Screens */
 #startScreen,#endScreen,#colorGuide{
   position:fixed;
   inset:0;
@@ -51,8 +76,10 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  z-index:30;
 }
 
+/* Start button */
 #startScreen button{
   padding:28px 90px;
   font-size:44px;
@@ -61,9 +88,13 @@ body{
   background:linear-gradient(#ff9acb,#ff4d88);
   color:white;
   box-shadow:0 10px #ff2f75;
+  cursor:pointer;
 }
 
+/* End screen */
 #endScreen{display:none}
+
+/* Color Guide */
 #colorGuide{display:none}
 
 .guideBox{
@@ -80,16 +111,15 @@ body{
 .guideRow{
   margin:10px 0;
   font-size:30px;
-  font-weight:bold;
 }
 
-/* FULL COLOR WORDS */
-.red{color:red;}
-.blue{color:#3fa9ff;}
-.yellow{color:#ffd93d;}
-.green{color:#2ecc71;}
-.purple{color:#b14cff;}
-.orange{color:#ff8c1a;}
+/* Guide colored icons */
+.red::before{content:"🎈 ";color:red;}
+.blue::before{content:"🎈 ";color:#3fa9ff;}
+.yellow::before{content:"🎈 ";color:#ffd93d;}
+.green::before{content:"🎈 ";color:#4cd964;}
+.purple::before{content:"🎈 ";color:#b14cff;}
+.orange::before{content:"🎈 ";color:#ff8c1a;}
 
 .closeGuide{
   margin-top:25px;
@@ -99,4 +129,5 @@ body{
   border-radius:20px;
   background:#ff9acb;
   color:white;
+  cursor:pointer;
 }
