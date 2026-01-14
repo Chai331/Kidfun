@@ -10,20 +10,14 @@ body{
 #topBar{
   position:fixed;
   top:10px;
-  left:0;
   width:100%;
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items:center;
+  display:flex;
+  justify-content:space-between;
   padding:0 20px;
   font-size:28px;
-  box-sizing:border-box;
 }
 
-#hearts{justify-self:start;}
-#score{justify-self:center;}
-#time{justify-self:end;}
-
+/* Question */
 #question{
   margin-top:70px;
   text-align:center;
@@ -38,39 +32,31 @@ body{
   height:80%;
 }
 
-/* REAL BALLOONS */
+/* Balloons */
 .balloon{
   position:absolute;
-  bottom:-150px;
-  width:90px;
-  height:110px;
-  border-radius:50% 50% 45% 45%;
+  bottom:-120px;
+  width:80px;
+  height:100px;
+  border-radius:50% 50% 50% 50%;
   cursor:pointer;
-  animation:fly 7s linear forwards;
-  box-shadow: inset -8px -12px rgba(0,0,0,0.15);
+  animation:fly 6s linear forwards;
+  box-shadow: inset -8px -10px rgba(0,0,0,.15);
 }
 
-/* String */
 .balloon::after{
   content:"";
   position:absolute;
+  bottom:-30px;
   left:50%;
-  bottom:-35px;
   width:2px;
-  height:35px;
+  height:30px;
   background:#555;
 }
 
-/* Balloon colors */
-.balloon.red{background:#ff3b3b;}
-.balloon.blue{background:#3fa9ff;}
-.balloon.yellow{background:#ffd93d;}
-.balloon.green{background:#4cd964;}
-.balloon.purple{background:#b14cff;}
-.balloon.orange{background:#ff8c1a;}
-
+/* Fly animation */
 @keyframes fly{
-  from{bottom:-150px;}
+  from{bottom:-120px;}
   to{bottom:110%;}
 }
 
@@ -94,30 +80,50 @@ body{
   background:linear-gradient(#ff9acb,#ff4d88);
   color:white;
   box-shadow:0 10px #ff2f75;
+  cursor:pointer;
 }
 
+/* End screen hidden */
 #endScreen{display:none}
+
+/* Guide hidden */
 #colorGuide{display:none}
 
-/* Guide box */
-.guideBox{
-  background:white;
-  border-radius:30px;
-  padding:40px 60px;
-  font-size:32px;
+/* ===== CUTER GAME OVER SCREEN ===== */
+
+#endScreen{
+  background:linear-gradient(#a8e9ff,#fff3b0);
   text-align:center;
-  box-shadow:0 14px 0 rgba(0,0,0,.25);
 }
 
-.guideTitle{font-size:42px;margin-bottom:15px;}
-.guideRow{margin:10px 0;}
+#endScreen h1{
+  font-size:64px;
+  color:#ff4d88;
+  text-shadow:3px 3px #ffd93d;
+  margin-bottom:10px;
+}
 
-.closeGuide{
-  margin-top:25px;
-  padding:18px 60px;
-  font-size:30px;
+#finalScore{
+  font-size:46px;
+  background:white;
+  padding:20px 50px;
+  border-radius:30px;
+  box-shadow:0 10px #ffd93d;
+  margin:20px 0 40px;
+}
+
+#endScreen button{
+  padding:26px 90px;
+  font-size:38px;
+  border-radius:40px;
   border:none;
-  border-radius:20px;
-  background:#ff9acb;
+  background:linear-gradient(#ff9acb,#ff4d88);
   color:white;
+  cursor:pointer;
+  box-shadow:0 10px #ff2f75;
+  transition:.15s;
+}
+
+#endScreen button:hover{
+  transform:scale(1.08);
 }
