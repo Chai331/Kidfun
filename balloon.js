@@ -50,10 +50,10 @@ function spawnBalloon(){
   b.onclick=()=>{
     if(color==="red"){
       score+=10;
-      playPop();       // correct balloon
+      playPop();
     }else{
       lives--;
-      playWrong();     // wrong balloon
+      playWrong();
     }
     updateUI();
     b.remove();
